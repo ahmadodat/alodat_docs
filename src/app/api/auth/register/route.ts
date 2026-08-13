@@ -1,88 +1,72 @@
 import { db } from "@/db";
-import { users, categories } from "@/db/schema";
-import { createToken } from "@/lib/auth";
-import bcrypt from "bcryptjs";
+import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { sendExpiryAlertEmail } from "@/lib/mail"; // تم تعديل الاسم هنا
+import bcrypt from "bcrypt";
+import { sendExpiryAlertEmail } from "@/lib/mail";
 
 export async function POST(request: Request) {
   try {
-    const { email, password } = await request.json();
+    const body = await request.json();
+    const { name, email, password } = body;
 
-    if (!email || !password) {
+    if (!name || !email || !password) {
       return Response.json(
-        { error: "البريد الإلكتروني وكلمة المرور مطلوبان" },
+        { success: false, error: "جميع الحقول مطلوبة" },
         { status: 400 }
       );
     }
 
-    const existing = await db
+    // التحقق مما إذا كان المستخدم موجوداً مسبقاً
+    const existingUser = await db
       .select()
       .from(users)
       .where(eq(users.email, email))
       .limit(1);
 
-    if (existing.length > 0) {
+    if (existingUser.length > 0) {
       return Response.json(
-        { error: "البريد الإلكتروني مسجل مسبقاً" },
+        { success: false, error: "البريد الإلكتروني مستخدم مسبقاً" },
         { status: 400 }
       );
     }
 
+    // تشفير كلمة المرور
     const hashedPassword = await bcrypt.hash(password, 10);
-    const userId = crypto.randomUUID();
 
+    // إدخال المستخدم الجديد في قاعدة البيانات
     await db.insert(users).values({
-      id: userId,
+      name,
       email,
       password: hashedPassword,
     });
 
-    // Create default categories
-    const defaultCategories = [
-      { name: "هوية", color: "#3b82f6", icon: "🆔", isDefault: true },
-      { name: "جواز سفر", color: "#10b981", icon: "🛂", isDefault: true },
-      { name: "رخصة قيادة", color: "#f59e0b", icon: "🚗", isDefault: true },
-      { name: "تأمين", color: "#8b5cf6", icon: "🛡️", isDefault: true },
-      { name: "عقود", color: "#ef4444", icon: "📄", isDefault: true },
-      { name: "شهادات", color: "#06b6d4", icon: "🎓", isDefault: true },
-      { name: "أخرى", color: "#6b7280", icon: "📋", isDefault: true },
-    ];
-
-    for (const cat of defaultCategories) {
-      await db.insert(categories).values({
-        id: crypto.randomUUID(),
-        userId,
-        ...cat,
+    // إرسال البريد الترحيبي بالتنسيق الجديد المتوافق مع الدالة
+    try {
+      await sendExpiryAlertEmail({
+        to: email,
+        categoryName: "حساب جديد",
+        expiryDate: "غير محدد",
+        timeRemaining: "تفعيل الحساب بنجاح",
+        personName: name,
+        country: "غير محدد",
+        documentNumber: "لا يوجد",
+        notes: "تم إنشاء حسابك بنجاح في نظام إدارة الوثائق.",
       });
+    } catch (emailError) {
+      console.error("Failed to send welcome email:", emailError);
+      // لا نوقف عملية التسجيل إذا فشل إرسال الإيميل فقط
     }
 
-    // إرسال البريد الترحيبي
-    // ملاحظة: بما أن دالة sendExpiryAlertEmail مصممة لفحص التواريخ، 
-    // يفضل مستقبلاً إنشاء دالة منفصلة للبريد الترحيبي في mail.ts
-    // حالياً نقوم باستدعاء الدالة المتاحة
-    await sendExpiryAlertEmail({
-      to: email,
-      documentName: "حسابك الجديد",
-      expiryDate: "غير محدد",
-      timeRemaining: "تفعيل الحساب بنجاح"
-    });
-
-    const token = await createToken(userId, email);
-
-    const response = Response.json({
+    return Response.json({
       success: true,
-      user: { id: userId, email },
+      message: "تم تسجيل الحساب بنجاح",
     });
 
-    response.headers.set(
-      "Set-Cookie",
-      `auth_token=${token}; Path=/; HttpOnly; SameSite=Lax; Max-Age=${7 * 24 * 60 * 60}`
-    );
-
-    return response;
   } catch (error) {
     console.error("Registration error:", error);
-    return Response.json({ error: "حدث خطأ في التسجيل" }, { status: 500 });
+    return Response.json(
+      { success: false, error: "حدث خطأ أثناء التسجيل" },
+      { status: 500 }
+    );
   }
 }
