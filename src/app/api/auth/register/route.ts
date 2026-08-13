@@ -1,7 +1,7 @@
 import { db } from "@/db";
 import { users } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import { sendExpiryAlertEmail } from "@/lib/mail";
 
 export async function POST(request: Request) {
@@ -30,7 +30,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // تشفير كلمة المرور
+    // تشفير كلمة المرور باستخدام bcryptjs
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // إدخال المستخدم الجديد في قاعدة البيانات
@@ -54,7 +54,6 @@ export async function POST(request: Request) {
       });
     } catch (emailError) {
       console.error("Failed to send welcome email:", emailError);
-      // لا نوقف عملية التسجيل إذا فشل إرسال الإيميل فقط
     }
 
     return Response.json({
