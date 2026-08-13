@@ -4,6 +4,14 @@ import { sendNotificationEmail } from "@/lib/mail";
 import { eq } from "drizzle-orm";
 import { NextResponse } from "next/server";
 
+// دالة مساعدة لتحويل التاريخ إلى تنسيق YYYY-MM-DD
+function formatDate(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
 export async function GET(request: Request) {
   const authHeader = request.headers.get("authorization");
   if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
@@ -20,6 +28,9 @@ export async function GET(request: Request) {
   const oneMonthFromNow = new Date();
   oneMonthFromNow.setDate(today.getDate() + 30);
 
+  const targetThreeMonthsStr = formatDate(threeMonthsFromNow);
+  const targetOneMonthStr = formatDate(oneMonthFromNow);
+
   const expiringDocs = await db.select()
     .from(documents)
     .leftJoin(users, eq(documents.userId, users.id));
@@ -27,16 +38,17 @@ export async function GET(request: Request) {
   for (const doc of expiringDocs) {
     if (!doc.documents.expiryDate || !doc.users?.email) continue;
 
-    const expiryDate = new Date(doc.documents.expiryDate);
+    // توحيد تنسيق تاريخ الانتهاء المخزن في القاعدة للمقارنة السليمة
+    const docExpiryStr = doc.documents.expiryDate.trim();
     
-    // التحقق مما إذا كان تاريخ الانتهاء يوافق تماماً بعد 3 أشهر أو بعد شهر واحد
-    if (expiryDate.toDateString() === threeMonthsFromNow.toDateString() || 
-        expiryDate.toDateString() === oneMonthFromNow.toDateString()) {
-      
-      const periodText = expiryDate.toDateString() === threeMonthsFromNow.toDateString() 
-        ? "3 أشهر" 
-        : "شهر واحد";
+    let periodText = "";
+    if (docExpiryStr === targetThreeMonthsStr) {
+      periodText = "3 أشهر";
+    } else if (docExpiryStr === targetOneMonthStr) {
+      periodText = "شهر واحد";
+    }
 
+    if (periodText) {
       await sendNotificationEmail(
         doc.users.email,
         "تنبيه: اقتراب موعد انتهاء الوثيقة",
