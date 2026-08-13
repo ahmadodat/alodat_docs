@@ -3,7 +3,7 @@ import { users, categories } from "@/db/schema";
 import { createToken } from "@/lib/auth";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
-import { sendNotificationEmail } from "@/lib/mail"; // أضفنا استيراد دالة الإرسال
+import { sendExpiryAlertEmail } from "@/lib/mail"; // تم تعديل الاسم هنا
 
 export async function POST(request: Request) {
   try {
@@ -57,12 +57,16 @@ export async function POST(request: Request) {
       });
     }
 
-    // إرسال البريد الترحيلي عند التسجيل بنجاح
-    await sendNotificationEmail(
-      email,
-      "مرحباً بك في نظام إدارة الوثائق الشخصية",
-      "تم إنشاء حسابك وتفعيل الأقسام الافتراضية بنجاح. يمكنك الآن البدء في تنظيم وإدارة وثائقك الشخصية بكل سهولة وأمان عبر منصتنا."
-    );
+    // إرسال البريد الترحيبي
+    // ملاحظة: بما أن دالة sendExpiryAlertEmail مصممة لفحص التواريخ، 
+    // يفضل مستقبلاً إنشاء دالة منفصلة للبريد الترحيبي في mail.ts
+    // حالياً نقوم باستدعاء الدالة المتاحة
+    await sendExpiryAlertEmail({
+      to: email,
+      documentName: "حسابك الجديد",
+      expiryDate: "غير محدد",
+      timeRemaining: "تفعيل الحساب بنجاح"
+    });
 
     const token = await createToken(userId, email);
 
