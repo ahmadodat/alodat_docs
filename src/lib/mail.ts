@@ -49,7 +49,7 @@ export async function sendExpiryAlertEmail({
     div,
     p,
     span {
-      font-family: Tahoma, Arial, sans-serif !important;
+      font-family: Tahoma, Arial, "Segoe UI", sans-serif !important;
     }
   </style>
 
@@ -61,10 +61,10 @@ export async function sendExpiryAlertEmail({
     margin:0;
     padding:0;
     background:#f5f6f8;
-    font-family:Tahoma,Arial,sans-serif;
     color:#1f2937;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
 
@@ -78,7 +78,7 @@ export async function sendExpiryAlertEmail({
     width:100%;
     padding:22px 12px;
     direction:rtl;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
 <tr>
@@ -98,7 +98,7 @@ export async function sendExpiryAlertEmail({
     border-radius:10px;
     overflow:hidden;
     direction:rtl;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
 
@@ -112,7 +112,7 @@ export async function sendExpiryAlertEmail({
     border-bottom:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
 
@@ -124,7 +124,7 @@ export async function sendExpiryAlertEmail({
   dir="rtl"
   style="
     direction:rtl;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
 <tr>
@@ -137,7 +137,7 @@ export async function sendExpiryAlertEmail({
   style="
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
 
@@ -147,7 +147,7 @@ export async function sendExpiryAlertEmail({
     font-weight:bold;
     color:#2563eb;
     direction:rtl;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   نظام إدارة الوثائق الشخصية
@@ -163,7 +163,7 @@ export async function sendExpiryAlertEmail({
   style="
     direction:rtl;
     text-align:left;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
 
@@ -177,7 +177,7 @@ export async function sendExpiryAlertEmail({
     padding:4px 8px;
     border-radius:5px;
     direction:rtl;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   تنبيه
@@ -201,22 +201,23 @@ export async function sendExpiryAlertEmail({
     padding:20px;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
 
 
-<!-- العنوان مع الأيقونة -->
+<!-- ================= TITLE ================= -->
 
 <table
+  width="100%"
   cellpadding="0"
   cellspacing="0"
   border="0"
   dir="rtl"
   style="
+    width:100%;
     direction:rtl;
-    margin-bottom:12px;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
 <tr>
@@ -224,11 +225,13 @@ export async function sendExpiryAlertEmail({
 <!-- الأيقونة -->
 
 <td
+  width="43"
   valign="top"
   style="
-    padding-left:9px;
+    width:43px;
+    padding-left:10px;
     direction:rtl;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
 
@@ -241,7 +244,7 @@ export async function sendExpiryAlertEmail({
     background:#fef2f2;
     border-radius:8px;
     font-size:18px;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   ⚠️
@@ -258,7 +261,7 @@ export async function sendExpiryAlertEmail({
   style="
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
 
@@ -267,9 +270,10 @@ export async function sendExpiryAlertEmail({
     font-size:19px;
     font-weight:bold;
     line-height:1.5;
+    color:#111827;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   تنبيه انتهاء الوثيقة
@@ -279,6 +283,38 @@ export async function sendExpiryAlertEmail({
 
 </tr>
 </table>
+
+
+<!-- ================= REMINDER ================= -->
+
+<div
+  dir="rtl"
+  style="
+    margin-top:10px;
+    margin-bottom:14px;
+    padding:9px 12px;
+    background:#f8fafc;
+    border-right:3px solid #2563eb;
+    border-radius:5px;
+    color:#475569;
+    font-size:12px;
+    line-height:1.6;
+    direction:rtl;
+    text-align:right;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
+  "
+>
+  <strong
+    style="
+      color:#1e40af;
+      font-family:Tahoma,Arial,'Segoe UI',sans-serif;
+    "
+  >
+    تذكير:
+  </strong>
+
+  لا تنسَ تجديد الوثيقة قبل انتهاء صلاحيتها.
+</div>
 
 
 <!-- ================= DETAILS ================= -->
@@ -295,7 +331,7 @@ export async function sendExpiryAlertEmail({
     border-radius:7px;
     overflow:hidden;
     direction:rtl;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
 
@@ -314,7 +350,7 @@ export async function sendExpiryAlertEmail({
     font-size:12px;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   نوع الوثيقة
@@ -328,7 +364,7 @@ export async function sendExpiryAlertEmail({
     font-weight:bold;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   ${categoryName}
@@ -351,7 +387,7 @@ export async function sendExpiryAlertEmail({
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   تاريخ الانتهاء
@@ -367,7 +403,7 @@ export async function sendExpiryAlertEmail({
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   ${expiryDate}
@@ -390,7 +426,7 @@ export async function sendExpiryAlertEmail({
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   الوقت المتبقي
@@ -406,7 +442,7 @@ export async function sendExpiryAlertEmail({
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   ${timeRemaining}
@@ -432,7 +468,7 @@ ${
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   رقم الوثيقة
@@ -446,7 +482,7 @@ ${
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   ${documentNumber}
@@ -475,7 +511,7 @@ ${
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   صاحب الوثيقة
@@ -489,7 +525,7 @@ ${
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   ${personName}
@@ -518,7 +554,7 @@ ${
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   الدولة
@@ -532,7 +568,7 @@ ${
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   ${country}
@@ -564,7 +600,7 @@ ${
     line-height:1.5;
     direction:rtl;
     text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
   ${notes}
@@ -572,29 +608,6 @@ ${
 `
     : ''
 }
-
-
-<!-- ================= REMINDER ================= -->
-
-<div
-  dir="rtl"
-  style="
-    margin-top:12px;
-    padding:10px 12px;
-    background:#eff6ff;
-    border-right:3px solid #2563eb;
-    border-radius:5px;
-    font-size:12px;
-    color:#1e40af;
-    line-height:1.6;
-    direction:rtl;
-    text-align:right;
-    font-family:Tahoma,Arial,sans-serif;
-  "
->
-  <strong>تذكير:</strong>
-  لا تنسَ تجديد الوثيقة قبل انتهاء صلاحيتها.
-</div>
 
 
 </td>
@@ -615,7 +628,7 @@ ${
     color:#9ca3af;
     line-height:1.5;
     direction:rtl;
-    font-family:Tahoma,Arial,sans-serif;
+    font-family:Tahoma,Arial,'Segoe UI',sans-serif;
   "
 >
 
