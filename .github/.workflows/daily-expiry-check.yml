@@ -17,4 +17,4 @@ jobs:
       - name: Hit the Check Expiry API Endpoint
         # أمر curl يقوم بزيارة الرابط الخاص بك لتشغيل الكود الموجود فيه
         run: |
-          curl -X GET "https://alodat.net/api/cron/check-expiry"
+          curl -X GET "https://alodat-docs.vercel.app/"
