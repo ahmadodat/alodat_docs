@@ -35,21 +35,33 @@ export async function sendExpiryAlertEmail({
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 </head>
 
-<body style="
-  margin:0;
-  padding:0;
-  background:#f5f6f8;
-  font-family:Arial,Tahoma,sans-serif;
-  color:#1f2937;
-">
+<body
+  dir="rtl"
+  style="
+    margin:0;
+    padding:0;
+    background:#f5f6f8;
+    font-family:Arial,Tahoma,sans-serif;
+    color:#1f2937;
+    direction:rtl;
+    text-align:right;
+  "
+>
 
 <table
   width="100%"
   cellpadding="0"
   cellspacing="0"
-  style="padding:25px 12px;"
+  border="0"
+  dir="rtl"
+  style="
+    width:100%;
+    padding:22px 12px;
+    direction:rtl;
+  "
 >
 <tr>
 <td align="center">
@@ -58,6 +70,8 @@ export async function sendExpiryAlertEmail({
   width="520"
   cellpadding="0"
   cellspacing="0"
+  border="0"
+  dir="rtl"
   style="
     width:100%;
     max-width:520px;
@@ -65,6 +79,7 @@ export async function sendExpiryAlertEmail({
     border:1px solid #e5e7eb;
     border-radius:10px;
     overflow:hidden;
+    direction:rtl;
   "
 >
 
@@ -72,33 +87,72 @@ export async function sendExpiryAlertEmail({
 <!-- HEADER -->
 
 <tr>
-<td style="
-  padding:18px 22px;
-  border-bottom:1px solid #eeeeee;
-">
+<td
+  dir="rtl"
+  style="
+    padding:17px 20px;
+    border-bottom:1px solid #eeeeee;
+    direction:rtl;
+    text-align:right;
+  "
+>
 
-<table width="100%" cellpadding="0" cellspacing="0">
+<table
+  width="100%"
+  cellpadding="0"
+  cellspacing="0"
+  border="0"
+  dir="rtl"
+>
 <tr>
 
-<td>
+<!-- النظام -->
 
-<div style="
-  font-size:17px;
-  font-weight:bold;
-  color:#2563eb;
-">
-  ALODAT
+<td
+  align="right"
+  dir="rtl"
+  style="
+    direction:rtl;
+    text-align:right;
+  "
+>
+
+<div
+  style="
+    font-size:15px;
+    font-weight:bold;
+    color:#2563eb;
+    direction:rtl;
+  "
+>
+  نظام إدارة الوثائق الشخصية
 </div>
 
 </td>
 
-<td align="left">
+<!-- التنبيه -->
 
-<div style="
-  font-size:11px;
-  color:#dc2626;
-  font-weight:bold;
-">
+<td
+  align="left"
+  dir="rtl"
+  style="
+    direction:rtl;
+    text-align:left;
+  "
+>
+
+<div
+  style="
+    display:inline-block;
+    font-size:11px;
+    color:#dc2626;
+    font-weight:bold;
+    background:#fef2f2;
+    padding:4px 8px;
+    border-radius:5px;
+    direction:rtl;
+  "
+>
   تنبيه
 </div>
 
@@ -114,25 +168,42 @@ export async function sendExpiryAlertEmail({
 <!-- CONTENT -->
 
 <tr>
-<td style="
-  padding:22px;
-">
+<td
+  dir="rtl"
+  style="
+    padding:20px;
+    direction:rtl;
+    text-align:right;
+  "
+>
 
 
-<div style="
-  font-size:20px;
-  font-weight:bold;
-  margin-bottom:7px;
-">
+<!-- TITLE -->
+
+<div
+  style="
+    font-size:19px;
+    font-weight:bold;
+    line-height:1.5;
+    margin-bottom:5px;
+    direction:rtl;
+    text-align:right;
+  "
+>
   تنبيه انتهاء الوثيقة
 </div>
 
-<div style="
-  font-size:13px;
-  color:#6b7280;
-  margin-bottom:18px;
-">
-  يرجى مراجعة الوثيقة قبل انتهاء صلاحيتها.
+<div
+  style="
+    font-size:12px;
+    color:#6b7280;
+    line-height:1.6;
+    margin-bottom:15px;
+    direction:rtl;
+    text-align:right;
+  "
+>
+  يرجى مراجعة بيانات الوثيقة قبل انتهاء صلاحيتها.
 </div>
 
 
@@ -142,106 +213,159 @@ export async function sendExpiryAlertEmail({
   width="100%"
   cellpadding="0"
   cellspacing="0"
+  border="0"
+  dir="rtl"
   style="
+    width:100%;
     border:1px solid #e5e7eb;
     border-radius:7px;
     overflow:hidden;
+    direction:rtl;
   "
 >
 
+<!-- نوع الوثيقة -->
+
 <tr>
 
-<td style="
-  padding:10px 13px;
-  background:#f9fafb;
-  color:#6b7280;
-  font-size:12px;
-  width:38%;
-">
+<td
+  width="38%"
+  dir="rtl"
+  style="
+    width:38%;
+    padding:9px 12px;
+    background:#f9fafb;
+    color:#6b7280;
+    font-size:12px;
+    direction:rtl;
+    text-align:right;
+  "
+>
   نوع الوثيقة
 </td>
 
-<td style="
-  padding:10px 13px;
-  font-size:13px;
-  font-weight:bold;
-">
+<td
+  dir="rtl"
+  style="
+    padding:9px 12px;
+    font-size:13px;
+    font-weight:bold;
+    direction:rtl;
+    text-align:right;
+  "
+>
   ${categoryName}
 </td>
 
 </tr>
 
 
+<!-- تاريخ الانتهاء -->
+
 <tr>
 
-<td style="
-  padding:10px 13px;
-  background:#f9fafb;
-  color:#6b7280;
-  font-size:12px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  dir="rtl"
+  style="
+    padding:9px 12px;
+    background:#f9fafb;
+    color:#6b7280;
+    font-size:12px;
+    border-top:1px solid #eeeeee;
+    direction:rtl;
+    text-align:right;
+  "
+>
   تاريخ الانتهاء
 </td>
 
-<td style="
-  padding:10px 13px;
-  font-size:13px;
-  font-weight:bold;
-  color:#dc2626;
-  border-top:1px solid #eeeeee;
-">
+<td
+  dir="rtl"
+  style="
+    padding:9px 12px;
+    font-size:13px;
+    font-weight:bold;
+    color:#dc2626;
+    border-top:1px solid #eeeeee;
+    direction:rtl;
+    text-align:right;
+  "
+>
   ${expiryDate}
 </td>
 
 </tr>
 
 
+<!-- الوقت المتبقي -->
+
 <tr>
 
-<td style="
-  padding:10px 13px;
-  background:#f9fafb;
-  color:#6b7280;
-  font-size:12px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  dir="rtl"
+  style="
+    padding:9px 12px;
+    background:#f9fafb;
+    color:#6b7280;
+    font-size:12px;
+    border-top:1px solid #eeeeee;
+    direction:rtl;
+    text-align:right;
+  "
+>
   الوقت المتبقي
 </td>
 
-<td style="
-  padding:10px 13px;
-  font-size:13px;
-  font-weight:bold;
-  color:#dc2626;
-  border-top:1px solid #eeeeee;
-">
+<td
+  dir="rtl"
+  style="
+    padding:9px 12px;
+    font-size:13px;
+    font-weight:bold;
+    color:#dc2626;
+    border-top:1px solid #eeeeee;
+    direction:rtl;
+    text-align:right;
+  "
+>
   ${timeRemaining}
 </td>
 
 </tr>
 
 
+<!-- رقم الوثيقة -->
+
 ${
   documentNumber
     ? `
 <tr>
 
-<td style="
-  padding:10px 13px;
-  background:#f9fafb;
-  color:#6b7280;
-  font-size:12px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  dir="rtl"
+  style="
+    padding:9px 12px;
+    background:#f9fafb;
+    color:#6b7280;
+    font-size:12px;
+    border-top:1px solid #eeeeee;
+    direction:rtl;
+    text-align:right;
+  "
+>
   رقم الوثيقة
 </td>
 
-<td style="
-  padding:10px 13px;
-  font-size:13px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  dir="rtl"
+  style="
+    padding:9px 12px;
+    font-size:13px;
+    border-top:1px solid #eeeeee;
+    direction:rtl;
+    text-align:right;
+  "
+>
   ${documentNumber}
 </td>
 
@@ -251,26 +375,38 @@ ${
 }
 
 
+<!-- صاحب الوثيقة -->
+
 ${
   personName
     ? `
 <tr>
 
-<td style="
-  padding:10px 13px;
-  background:#f9fafb;
-  color:#6b7280;
-  font-size:12px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  dir="rtl"
+  style="
+    padding:9px 12px;
+    background:#f9fafb;
+    color:#6b7280;
+    font-size:12px;
+    border-top:1px solid #eeeeee;
+    direction:rtl;
+    text-align:right;
+  "
+>
   صاحب الوثيقة
 </td>
 
-<td style="
-  padding:10px 13px;
-  font-size:13px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  dir="rtl"
+  style="
+    padding:9px 12px;
+    font-size:13px;
+    border-top:1px solid #eeeeee;
+    direction:rtl;
+    text-align:right;
+  "
+>
   ${personName}
 </td>
 
@@ -280,26 +416,38 @@ ${
 }
 
 
+<!-- الدولة -->
+
 ${
   country
     ? `
 <tr>
 
-<td style="
-  padding:10px 13px;
-  background:#f9fafb;
-  color:#6b7280;
-  font-size:12px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  dir="rtl"
+  style="
+    padding:9px 12px;
+    background:#f9fafb;
+    color:#6b7280;
+    font-size:12px;
+    border-top:1px solid #eeeeee;
+    direction:rtl;
+    text-align:right;
+  "
+>
   الدولة
 </td>
 
-<td style="
-  padding:10px 13px;
-  font-size:13px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  dir="rtl"
+  style="
+    padding:9px 12px;
+    font-size:13px;
+    border-top:1px solid #eeeeee;
+    direction:rtl;
+    text-align:right;
+  "
+>
   ${country}
 </td>
 
@@ -311,48 +459,31 @@ ${
 </table>
 
 
+<!-- NOTES -->
+
 ${
   notes
     ? `
-<div style="
-  margin-top:12px;
-  padding:9px 12px;
-  background:#fffbeb;
-  border-right:3px solid #f59e0b;
-  font-size:12px;
-  color:#92400e;
-">
+<div
+  dir="rtl"
+  style="
+    margin-top:10px;
+    padding:8px 11px;
+    background:#fffbeb;
+    border-right:3px solid #f59e0b;
+    border-radius:4px;
+    font-size:12px;
+    color:#92400e;
+    line-height:1.5;
+    direction:rtl;
+    text-align:right;
+  "
+>
   ${notes}
 </div>
 `
     : ''
 }
-
-
-<!-- BUTTON -->
-
-<div style="
-  text-align:center;
-  margin-top:18px;
-">
-
-<a
-  href="https://alodat.net"
-  style="
-    display:inline-block;
-    background:#2563eb;
-    color:#ffffff;
-    text-decoration:none;
-    padding:10px 25px;
-    border-radius:6px;
-    font-size:13px;
-    font-weight:bold;
-  "
->
-  مراجعة الوثيقة
-</a>
-
-</div>
 
 
 </td>
@@ -363,15 +494,20 @@ ${
 
 <tr>
 
-<td style="
-  padding:12px 20px;
-  border-top:1px solid #eeeeee;
-  text-align:center;
-  font-size:10px;
-  color:#9ca3af;
-">
+<td
+  dir="rtl"
+  style="
+    padding:11px 18px;
+    border-top:1px solid #eeeeee;
+    text-align:center;
+    font-size:10px;
+    color:#9ca3af;
+    line-height:1.5;
+    direction:rtl;
+  "
+>
 
-رسالة تلقائية من نظام ALODAT — يرجى عدم الرد.
+رسالة تلقائية من نظام إدارة الوثائق الشخصية — يرجى عدم الرد.
 
 </td>
 
