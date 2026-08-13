@@ -3,6 +3,7 @@ import { users, categories } from "@/db/schema";
 import { createToken } from "@/lib/auth";
 import bcrypt from "bcryptjs";
 import { eq } from "drizzle-orm";
+import { sendNotificationEmail } from "@/lib/mail"; // أضفنا استيراد دالة الإرسال
 
 export async function POST(request: Request) {
   try {
@@ -55,6 +56,13 @@ export async function POST(request: Request) {
         ...cat,
       });
     }
+
+    // إرسال البريد الترحيلي عند التسجيل بنجاح
+    await sendNotificationEmail(
+      email,
+      "مرحباً بك في منصة Alodat",
+      "تم إنشاء حسابك وتفعيل الأقسام الافتراضية بنجاح، يسعدنا انضمامك إلينا!"
+    );
 
     const token = await createToken(userId, email);
 
