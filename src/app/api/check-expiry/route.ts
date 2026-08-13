@@ -24,11 +24,12 @@ export async function GET(request: Request) {
       const diffTime = expiry.getTime() - today.getTime();
       const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 
-      if (diffDays <= 30 && diffDays > 0) {
+      // الشرط المرن: تنبيه عند 90 يوماً بالضبط، أو أي يوم خلال آخر 30 يوماً
+      if (diffDays === 90 || (diffDays <= 30 && diffDays > 0)) {
         const userEmail = userMap.get(doc.userId);
         
         if (userEmail) {
-          const timeRemainingText = diffDays === 90 ? "3 أشهر" : "شهر واحد";
+          const timeRemainingText = diffDays > 30 ? "3 أشهر" : `أقل من شهر (متبقي ${diffDays} يوم)`;
 
           await sendExpiryAlertEmail({
             to: userEmail,
