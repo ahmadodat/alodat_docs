@@ -1,12 +1,8 @@
 name: Daily Expiry Check
 
-# متى يتم تشغيل هذا السكربت؟
 on:
   schedule:
-    # يعمل يومياً الساعة 8:00 صباحاً بتوقيت UTC
     - cron: '0 8 * * *'
-  
-  # يضيف زراً في لوحة تحكم GitHub لتشغيل السكربت يدوياً متى شئت للتجربة
   workflow_dispatch: 
 
 jobs:
@@ -15,7 +11,7 @@ jobs:
     
     steps:
       - name: Hit the Check Expiry API Endpoint
-        # تم تعديل الرابط ليوجه إلى مسار الـ API الصحيح لفحص الوثائق
+        # تم تصحيح الرابط بإزالة "/route.ts"
         run: |
-          curl -X GET "https://alodat-docs.vercel.app/api/cron/check-expiry/route.ts" \
+          curl -X GET "https://alodat-docs.vercel.app/api/cron/check-expiry" \
           -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
