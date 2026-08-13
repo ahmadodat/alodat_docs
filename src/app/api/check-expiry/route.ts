@@ -24,7 +24,7 @@ export async function GET(request: Request) {
       const diffTime = expiry.getTime() - today.getTime();
       const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
 
-      if (diffDays === 90 || diffDays === 30) {
+      if (diffDays <= 30 && diffDays > 0) {
         const userEmail = userMap.get(doc.userId);
         
         if (userEmail) {
