@@ -25,69 +25,60 @@ export async function sendExpiryAlertEmail({
     await resend.emails.send({
       from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: [to],
-      subject: `⚠️ تنبيه عاجل: اقتراب موعد انتهاء وثيقة (${categoryName})`,
+      subject: `تنبيه انتهاء صلاحية: ${categoryName}`,
       html: `
-        <div dir="rtl" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8f9fa; padding: 30px; border-radius: 12px; color: #333333; text-align: right;">
+        <div dir="rtl" style="font-family: Arial, sans-serif; max-width: 550px; margin: 0 auto; background-color: #ffffff; padding: 25px; border: 1px solid #eaeaea; border-radius: 8px; color: #222222; text-align: right;">
           
-          <!-- الهيدر -->
-          <div style="background: linear-gradient(135deg, #2c3e50, #1a252f); padding: 25px; border-radius: 10px 10px 0 0; text-align: center; color: #ffffff;">
-            <h1 style="margin: 0; font-size: 22px; font-weight: 600;">تنبيه انتهاء الصلاحية</h1>
-            <p style="margin: 5px 0 0; font-size: 13px; color: #bdc3c7;">نظام إدارة الوثائق - Alodat</p>
+          <!-- العنوان الرئيسي -->
+          <div style="border-bottom: 2px solid #f1f1f1; padding-bottom: 15px; margin-bottom: 20px;">
+            <h2 style="margin: 0; font-size: 18px; color: #d9534f;">⚠️ تنبيه اقتراب موعد الانتهاء</h2>
+            <p style="margin: 5px 0 0; font-size: 13px; color: #666;">متبقي على انتهاء الوثيقة: <strong style="color: #d9534f;">${timeRemaining}</strong></p>
           </div>
 
-          <!-- المحتوى الرئيسي -->
-          <div style="background-color: #ffffff; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-            <p style="font-size: 16px; color: #2c3e50; margin-top: 0;">عزيزي المستخدم،</p>
-            <p style="font-size: 15px; color: #555555; line-height: 1.6;">
-              نود إعلامك بأن إحدى الوثائق المسجلة في نظامك تقترب من موعد انتهائها خلال <strong style="color: #e74c3c;">${timeRemaining}</strong>.
-            </p>
+          <p style="font-size: 14px; color: #444; line-height: 1.5; margin-bottom: 15px;">
+            عزيزي المستخدم، نود لفت انتباهك إلى أن تفاصيل الوثيقة كالتالي:
+          </p>
 
-            <!-- بطاقة البيانات -->
-            <div style="background-color: #fdfefe; border: 1px solid #e1e8ed; border-radius: 8px; padding: 20px; margin: 20px 0;">
-              
-              <!-- التصنيف (بارز ومميز) -->
-              <div style="padding-bottom: 12px; border-bottom: 1px solid #eee; margin-bottom: 12px;">
-                <span style="font-size: 13px; color: #7f8c8d; display: block; margin-bottom: 3px;">🏷️ التصنيف</span>
-                <span style="font-size: 16px; font-weight: bold; color: #2980b9;">${categoryName}</span>
-              </div>
+          <!-- الجدول الأول: بيانات الوثيقة -->
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px; background-color: #fafafa; border-radius: 6px; overflow: hidden;">
+            <tr>
+              <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-size: 13px; color: #666; width: 35%;">🏷️ التصنيف</td>
+              <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-size: 14px; font-weight: bold; color: #0275d8;">${categoryName}</td>
+            </tr>
+            ${documentNumber ? `
+            <tr>
+              <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-size: 13px; color: #666;">🔢 رقم الوثيقة</td>
+              <td style="padding: 10px 12px; border-bottom: 1px solid #eee; font-size: 14px; font-weight: 600; color: #333;">${documentNumber}</td>
+            </tr>` : ''}
+            <tr>
+              <td style="padding: 10px 12px; font-size: 13px; color: #666;">📅 تاريخ الانتهاء</td>
+              <td style="padding: 10px 12px; font-size: 14px; font-weight: bold; color: #d9534f;">${expiryDate}</td>
+            </tr>
+          </table>
 
-              ${personName ? `
-              <div style="padding-bottom: 12px; border-bottom: 1px solid #eee; margin-bottom: 12px;">
-                <span style="font-size: 13px; color: #7f8c8d; display: block; margin-bottom: 3px;">👤 صاحب الوثيقة</span>
-                <span style="font-size: 15px; font-weight: 600; color: #2c3e50;">${personName}</span>
-              </div>` : ''}
+          <!-- الجدول الثاني: معلومات إضافية -->
+          ${(personName || country) ? `
+          <table style="width: 100%; border-collapse: collapse; margin-bottom: 15px; background-color: #fafafa; border-radius: 6px; overflow: hidden;">
+            ${personName ? `
+            <tr>
+              <td style="padding: 10px 12px; ${country ? 'border-bottom: 1px solid #eee;' : ''} font-size: 13px; color: #666; width: 35%;">👤 صاحب الوثيقة</td>
+              <td style="padding: 10px 12px; ${country ? 'border-bottom: 1px solid #eee;' : ''} font-size: 14px; font-weight: 600; color: #333;">${personName}</td>
+            </tr>` : ''}
+            ${country ? `
+            <tr>
+              <td style="padding: 10px 12px; font-size: 13px; color: #666; width: 35%;">🌍 الدولة</td>
+              <td style="padding: 10px 12px; font-size: 14px; font-weight: 600; color: #333;">${country}</td>
+            </tr>` : ''}
+          </table>` : ''}
 
-              ${country ? `
-              <div style="padding-bottom: 12px; border-bottom: 1px solid #eee; margin-bottom: 12px;">
-                <span style="font-size: 13px; color: #7f8c8d; display: block; margin-bottom: 3px;">🌍 الدولة</span>
-                <span style="font-size: 15px; font-weight: 600; color: #2c3e50;">${country}</span>
-              </div>` : ''}
-
-              ${documentNumber ? `
-              <div style="padding-bottom: 12px; border-bottom: 1px solid #eee; margin-bottom: 12px;">
-                <span style="font-size: 13px; color: #7f8c8d; display: block; margin-bottom: 3px;">🔢 رقم الوثيقة</span>
-                <span style="font-size: 15px; font-weight: 600; color: #2c3e50;">${documentNumber}</span>
-              </div>` : ''}
-
-              <div>
-                <span style="font-size: 13px; color: #7f8c8d; display: block; margin-bottom: 3px;">📅 تاريخ الانتهاء</span>
-                <span style="font-size: 15px; font-weight: bold; color: #c0392b;">${expiryDate}</span>
-              </div>
-            </div>
-
-            ${notes ? `
-            <div style="background-color: #fff9e6; border-right: 4px solid #f1c40f; padding: 12px 15px; border-radius: 4px; margin-bottom: 20px;">
-              <p style="margin: 0; font-size: 14px; color: #7f6000;"><strong>💡 ملاحظات:</strong> ${notes}</p>
-            </div>` : ''}
-
-            <p style="font-size: 14px; color: #555555; line-height: 1.5; text-align: center; margin-top: 25px;">
-              يرجى اتخاذ الإجراء اللازم لتجديد الوثيقة في أقرب وقت لتفادي أي تعطل.
-            </p>
-          </div>
+          ${notes ? `
+          <div style="background-color: #fff9e6; padding: 10px 12px; border-radius: 6px; margin-bottom: 15px; font-size: 13px; color: #8a6d3b;">
+            <strong>💡 ملاحظات:</strong> ${notes}
+          </div>` : ''}
 
           <!-- الفوتر -->
-          <div style="text-align: center; padding-top: 20px; font-size: 12px; color: #95a5a6;">
-            <p style="margin: 0;">هذه رسالة تلقائية من نظام Alodat، يرجى عدم الرد عليها.</p>
+          <div style="border-top: 1px solid #f1f1f1; padding-top: 12px; margin-top: 20px; text-align: center; font-size: 11px; color: #888;">
+            هذه رسالة تلقائية من نظام Alodat، يرجى عدم الرد.
           </div>
 
         </div>
