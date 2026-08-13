@@ -332,7 +332,7 @@ export async function sendExpiryAlertEmail({
   تذكير:
 </strong>
 
-لا تنسَ تجديد الوثيقة قبل انتهاء صلاحيتها.
+لا تنسى تجديد الوثيقة قبل انتهاء صلاحيتها
 
 </div>
 
