@@ -86,6 +86,7 @@ export async function sendExpiryAlertEmail({
   "
 >
 <tr>
+
 <td
   align="center"
   style="
@@ -114,10 +115,11 @@ export async function sendExpiryAlertEmail({
 <!-- ================= HEADER ================= -->
 
 <tr>
+
 <td
   dir="rtl"
   style="
-    padding:17px 20px;
+    padding:18px 20px;
     border-bottom:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -136,6 +138,7 @@ export async function sendExpiryAlertEmail({
     font-family:Arial,sans-serif;
   "
 >
+
 <tr>
 
 <!-- اسم النظام -->
@@ -152,7 +155,7 @@ export async function sendExpiryAlertEmail({
 
 <div
   style="
-    font-size:15px;
+    font-size:16px;
     font-weight:bold;
     color:#2563eb;
     direction:rtl;
@@ -163,6 +166,7 @@ export async function sendExpiryAlertEmail({
 </div>
 
 </td>
+
 
 <!-- كلمة تنبيه -->
 
@@ -179,11 +183,11 @@ export async function sendExpiryAlertEmail({
 <div
   style="
     display:inline-block;
-    font-size:11px;
+    font-size:12px;
     color:#dc2626;
     font-weight:bold;
     background:#fef2f2;
-    padding:4px 8px;
+    padding:5px 9px;
     border-radius:5px;
     direction:rtl;
     font-family:Arial,sans-serif;
@@ -195,15 +199,18 @@ export async function sendExpiryAlertEmail({
 </td>
 
 </tr>
+
 </table>
 
 </td>
+
 </tr>
 
 
 <!-- ================= CONTENT ================= -->
 
 <tr>
+
 <td
   dir="rtl"
   style="
@@ -229,15 +236,16 @@ export async function sendExpiryAlertEmail({
     font-family:Arial,sans-serif;
   "
 >
+
 <tr>
 
 <!-- الأيقونة -->
 
 <td
-  width="43"
+  width="45"
   valign="top"
   style="
-    width:43px;
+    width:45px;
     padding-left:10px;
     direction:rtl;
     font-family:Arial,sans-serif;
@@ -246,13 +254,13 @@ export async function sendExpiryAlertEmail({
 
 <div
   style="
-    width:34px;
-    height:34px;
-    line-height:34px;
+    width:36px;
+    height:36px;
+    line-height:36px;
     text-align:center;
     background:#fef2f2;
     border-radius:8px;
-    font-size:18px;
+    font-size:19px;
     font-family:Arial,sans-serif;
   "
 >
@@ -276,7 +284,7 @@ export async function sendExpiryAlertEmail({
 
 <div
   style="
-    font-size:19px;
+    font-size:20px;
     font-weight:bold;
     line-height:1.5;
     color:#111827;
@@ -291,6 +299,7 @@ export async function sendExpiryAlertEmail({
 </td>
 
 </tr>
+
 </table>
 
 
@@ -299,30 +308,32 @@ export async function sendExpiryAlertEmail({
 <div
   dir="rtl"
   style="
-    margin-top:10px;
-    margin-bottom:14px;
-    padding:9px 12px;
+    margin-top:11px;
+    margin-bottom:15px;
+    padding:10px 13px;
     background:#f8fafc;
     border-right:3px solid #2563eb;
     border-radius:5px;
     color:#475569;
-    font-size:12px;
-    line-height:1.6;
+    font-size:13px;
+    line-height:1.7;
     direction:rtl;
     text-align:right;
     font-family:Arial,sans-serif;
   "
 >
-  <strong
-    style="
-      color:#1e40af;
-      font-family:Arial,sans-serif;
-    "
-  >
-    تذكير:
-  </strong>
 
-  لا تنسَ تجديد الوثيقة قبل انتهاء صلاحيتها.
+<strong
+  style="
+    color:#1e40af;
+    font-family:Arial,sans-serif;
+  "
+>
+  تذكير:
+</strong>
+
+لا تنسَ تجديد الوثيقة قبل انتهاء صلاحيتها.
+
 </div>
 
 
@@ -344,6 +355,7 @@ export async function sendExpiryAlertEmail({
   "
 >
 
+
 <!-- نوع الوثيقة -->
 
 <tr>
@@ -353,10 +365,10 @@ export async function sendExpiryAlertEmail({
   dir="rtl"
   style="
     width:38%;
-    padding:9px 12px;
+    padding:10px 12px;
     background:#f9fafb;
     color:#6b7280;
-    font-size:12px;
+    font-size:13px;
     direction:rtl;
     text-align:right;
     font-family:Arial,sans-serif;
@@ -368,8 +380,8 @@ export async function sendExpiryAlertEmail({
 <td
   dir="rtl"
   style="
-    padding:9px 12px;
-    font-size:13px;
+    padding:10px 12px;
+    font-size:14px;
     font-weight:bold;
     direction:rtl;
     text-align:right;
@@ -389,10 +401,10 @@ export async function sendExpiryAlertEmail({
 <td
   dir="rtl"
   style="
-    padding:9px 12px;
+    padding:10px 12px;
     background:#f9fafb;
     color:#6b7280;
-    font-size:12px;
+    font-size:13px;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -405,8 +417,8 @@ export async function sendExpiryAlertEmail({
 <td
   dir="rtl"
   style="
-    padding:9px 12px;
-    font-size:13px;
+    padding:10px 12px;
+    font-size:14px;
     font-weight:bold;
     color:#dc2626;
     border-top:1px solid #eeeeee;
@@ -428,10 +440,10 @@ export async function sendExpiryAlertEmail({
 <td
   dir="rtl"
   style="
-    padding:9px 12px;
+    padding:10px 12px;
     background:#f9fafb;
     color:#6b7280;
-    font-size:12px;
+    font-size:13px;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -444,8 +456,8 @@ export async function sendExpiryAlertEmail({
 <td
   dir="rtl"
   style="
-    padding:9px 12px;
-    font-size:13px;
+    padding:10px 12px;
+    font-size:14px;
     font-weight:bold;
     color:#dc2626;
     border-top:1px solid #eeeeee;
@@ -470,10 +482,10 @@ ${
 <td
   dir="rtl"
   style="
-    padding:9px 12px;
+    padding:10px 12px;
     background:#f9fafb;
     color:#6b7280;
-    font-size:12px;
+    font-size:13px;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -486,8 +498,8 @@ ${
 <td
   dir="rtl"
   style="
-    padding:9px 12px;
-    font-size:13px;
+    padding:10px 12px;
+    font-size:14px;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -513,10 +525,10 @@ ${
 <td
   dir="rtl"
   style="
-    padding:9px 12px;
+    padding:10px 12px;
     background:#f9fafb;
     color:#6b7280;
-    font-size:12px;
+    font-size:13px;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -529,8 +541,8 @@ ${
 <td
   dir="rtl"
   style="
-    padding:9px 12px;
-    font-size:13px;
+    padding:10px 12px;
+    font-size:14px;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -556,10 +568,10 @@ ${
 <td
   dir="rtl"
   style="
-    padding:9px 12px;
+    padding:10px 12px;
     background:#f9fafb;
     color:#6b7280;
-    font-size:12px;
+    font-size:13px;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -572,8 +584,8 @@ ${
 <td
   dir="rtl"
   style="
-    padding:9px 12px;
-    font-size:13px;
+    padding:10px 12px;
+    font-size:14px;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -599,14 +611,14 @@ ${
 <div
   dir="rtl"
   style="
-    margin-top:10px;
-    padding:8px 11px;
+    margin-top:11px;
+    padding:9px 12px;
     background:#fffbeb;
     border-right:3px solid #f59e0b;
     border-radius:4px;
-    font-size:12px;
+    font-size:13px;
     color:#92400e;
-    line-height:1.5;
+    line-height:1.6;
     direction:rtl;
     text-align:right;
     font-family:Arial,sans-serif;
@@ -620,6 +632,7 @@ ${
 
 
 </td>
+
 </tr>
 
 
@@ -630,10 +643,10 @@ ${
 <td
   dir="rtl"
   style="
-    padding:11px 18px;
+    padding:12px 18px;
     border-top:1px solid #eeeeee;
     text-align:center;
-    font-size:10px;
+    font-size:11px;
     color:#9ca3af;
     line-height:1.5;
     direction:rtl;
@@ -651,7 +664,9 @@ ${
 </table>
 
 </td>
+
 </tr>
+
 </table>
 
 </body>
