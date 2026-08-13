@@ -25,25 +25,71 @@ export async function sendExpiryAlertEmail({
     await resend.emails.send({
       from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: [to],
-      subject: `تنبيه: اقتراب موعد انتهاء وثيقة ${categoryName}`,
+      subject: `⚠️ تنبيه عاجل: اقتراب موعد انتهاء وثيقة (${categoryName})`,
       html: `
-        <div dir="rtl" style="font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; background-color: #f9f9f9; border-radius: 8px;">
-          <h2 style="color: #d9534f; margin-top: 0;">تنبيه انتهاء صلاحية وثيقة</h2>
-          <p>عزيزي المستخدم،</p>
-          <p>نود تذكيرك بأن إحدى الوثائق المسجلة لديك تقترب من موعد انتهائها خلال <strong>${timeRemaining}</strong>.</p>
+        <div dir="rtl" style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; max-width: 600px; margin: 0 auto; background-color: #f8f9fa; padding: 30px; border-radius: 12px; color: #333333; text-align: right;">
           
-          <div style="background: #ffffff; padding: 15px; border: 1px solid #ddd; border-radius: 6px; margin: 15px 0;">
-            <p style="margin: 5px 0; font-size: 15px;">🏷️ <strong>التصنيف:</strong> <span style="color: #0275d8; font-weight: bold;">${categoryName}</span></p>
-            ${personName ? `<p style="margin: 5px 0;">👤 <strong>صاحب الوثيقة:</strong> ${personName}</p>` : ''}
-            ${country ? `<p style="margin: 5px 0;">🌍 <strong>الدولة:</strong> ${country}</p>` : ''}
-            ${documentNumber ? `<p style="margin: 5px 0;">🔢 <strong>رقم الوثيقة:</strong> ${documentNumber}</p>` : ''}
-            <p style="margin: 5px 0;">📅 <strong>تاريخ الانتهاء:</strong> <span style="color: #d9534f; font-weight: bold;">${expiryDate}</span></p>
-            ${notes ? `<p style="margin: 5px 0;">💡 <strong>ملاحظات:</strong> ${notes}</p>` : ''}
+          <!-- الهيدر -->
+          <div style="background: linear-gradient(135deg, #2c3e50, #1a252f); padding: 25px; border-radius: 10px 10px 0 0; text-align: center; color: #ffffff;">
+            <h1 style="margin: 0; font-size: 22px; font-weight: 600;">تنبيه انتهاء الصلاحية</h1>
+            <p style="margin: 5px 0 0; font-size: 13px; color: #bdc3c7;">نظام إدارة الوثائق - Alodat</p>
           </div>
 
-          <p>يرجى اتخاذ الإجراء اللازم لتجديدها في أقرب وقت.</p>
-          <hr style="border: none; border-top: 1px solid #eee; margin: 20px 0;" />
-          <p style="font-size: 12px; color: #777;">هذه رسالة تلقائية من نظام Alodat، يرجى عدم الرد عليها.</p>
+          <!-- المحتوى الرئيسي -->
+          <div style="background-color: #ffffff; padding: 30px; border-radius: 0 0 10px 10px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <p style="font-size: 16px; color: #2c3e50; margin-top: 0;">عزيزي المستخدم،</p>
+            <p style="font-size: 15px; color: #555555; line-height: 1.6;">
+              نود إعلامك بأن إحدى الوثائق المسجلة في نظامك تقترب من موعد انتهائها خلال <strong style="color: #e74c3c;">${timeRemaining}</strong>.
+            </p>
+
+            <!-- بطاقة البيانات -->
+            <div style="background-color: #fdfefe; border: 1px solid #e1e8ed; border-radius: 8px; padding: 20px; margin: 20px 0;">
+              
+              <!-- التصنيف (بارز ومميز) -->
+              <div style="padding-bottom: 12px; border-bottom: 1px solid #eee; margin-bottom: 12px;">
+                <span style="font-size: 13px; color: #7f8c8d; display: block; margin-bottom: 3px;">🏷️ التصنيف</span>
+                <span style="font-size: 16px; font-weight: bold; color: #2980b9;">${categoryName}</span>
+              </div>
+
+              ${personName ? `
+              <div style="padding-bottom: 12px; border-bottom: 1px solid #eee; margin-bottom: 12px;">
+                <span style="font-size: 13px; color: #7f8c8d; display: block; margin-bottom: 3px;">👤 صاحب الوثيقة</span>
+                <span style="font-size: 15px; font-weight: 600; color: #2c3e50;">${personName}</span>
+              </div>` : ''}
+
+              ${country ? `
+              <div style="padding-bottom: 12px; border-bottom: 1px solid #eee; margin-bottom: 12px;">
+                <span style="font-size: 13px; color: #7f8c8d; display: block; margin-bottom: 3px;">🌍 الدولة</span>
+                <span style="font-size: 15px; font-weight: 600; color: #2c3e50;">${country}</span>
+              </div>` : ''}
+
+              ${documentNumber ? `
+              <div style="padding-bottom: 12px; border-bottom: 1px solid #eee; margin-bottom: 12px;">
+                <span style="font-size: 13px; color: #7f8c8d; display: block; margin-bottom: 3px;">🔢 رقم الوثيقة</span>
+                <span style="font-size: 15px; font-weight: 600; color: #2c3e50;">${documentNumber}</span>
+              </div>` : ''}
+
+              <div>
+                <span style="font-size: 13px; color: #7f8c8d; display: block; margin-bottom: 3px;">📅 تاريخ الانتهاء</span>
+                <span style="font-size: 15px; font-weight: bold; color: #c0392b;">${expiryDate}</span>
+              </div>
+            </div>
+
+            ${notes ? `
+            <div style="background-color: #fff9e6; border-right: 4px solid #f1c40f; padding: 12px 15px; border-radius: 4px; margin-bottom: 20px;">
+              <p style="margin: 0; font-size: 14px; color: #7f6000;"><strong>💡 ملاحظات:</strong> ${notes}</p>
+            </div>` : ''}
+
+            <p style="font-size: 14px; color: #555555; line-height: 1.5; text-align: center; margin-top: 25px;">
+              يرجى اتخاذ الإجراء اللازم لتجديد الوثيقة في أقرب وقت لتفادي أي تعطل.
+            </p>
+          </div>
+
+          <!-- الفوتر -->
+          <div style="text-align: center; padding-top: 20px; font-size: 12px; color: #95a5a6;">
+            <p style="margin: 0;">هذه رسالة تلقائية من نظام Alodat، يرجى عدم الرد عليها.</p>
+          </div>
+
         </div>
       `,
     });
