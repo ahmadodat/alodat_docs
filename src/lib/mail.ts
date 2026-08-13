@@ -30,7 +30,7 @@ export async function sendExpiryAlertEmail({
         <div dir="rtl" style="font-family: Arial, sans-serif; padding: 20px; line-height: 1.6; background-color: #f9f9f9; border-radius: 8px;">
           <h2 style="color: #d9534f; margin-top: 0;">تنبيه انتهاء صلاحية وثيقة</h2>
           <p>عزيزي المستخدم،</p>
-          <p>نود تذكيرك بأن الوثيقة التابعة لتصنيف <strong>(${categoryName})</strong> ستنتهي خلال <strong>${timeRemaining}</strong>.</p>
+          <p>نود تذكيرك بأن الوثيقة التابعة لتصنيف <strong>(${categoryName})</strong> ستنتهي  <strong>${timeRemaining}</strong>.</p>
           
           <div style="background: #ffffff; padding: 15px; border: 1px solid #ddd; border-radius: 6px; margin: 15px 0;">
             ${personName ? `<p style="margin: 5px 0;">👤 <strong>صاحب الوثيقة:</strong> ${personName}</p>` : ''}
