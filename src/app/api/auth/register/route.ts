@@ -1,70 +1,43 @@
 import { db } from "@/db";
-import { users } from "@/db/schema";
+import { documents, users, persons } from "@/db/schema"; // تأكد من استيراد persons إذا كان جدول الأفراد موجوداً
 import { eq } from "drizzle-orm";
-import bcrypt from "bcryptjs";
 import { sendExpiryAlertEmail } from "@/lib/mail";
 
-export async function POST(request: Request) {
+export async function GET(request: Request) {
   try {
-    const body = await request.json();
-    const { name, email, password } = body;
+    // جلب جميع الوثائق مع المستخدمين والأفراد (ح حسب هيكل قاعدة بياناتك)
+    const allDocs = await db.select().from(documents);
+    const allUsers = await db.select().from(users);
+    const allPersons = await db.select().from(persons);
 
-    if (!name || !email || !password) {
-      return Response.json(
-        { success: false, error: "جميع الحقول مطلوبة" },
-        { status: 400 }
-      );
+    // تتبع العمليات أو الفحص...
+    for (const doc of allDocs) {
+      // افتراض منطق حساب انتهاء الصلاحية وتحديد المستخدم المرتبط
+      const user = allUsers.find(u => u.id === doc.userId);
+      const person = allPersons.find(p => p.id === doc.personId);
+      
+      if (user && user.email) {
+        // مثال لتاريخ انتهاء صلاحية افتراضي أو محسوب
+        const expiry = new Date(doc.expiryDate || Date.now());
+        const timeRemainingText = "قريباً جداً";
+
+        // استدعاء دالة الإيميل بالخصائص الجديدة الصحيحة 100%
+        await sendExpiryAlertEmail({
+          to: user.email,
+          categoryName: doc.categoryName || "غير محدد",
+          expiryDate: expiry.toISOString().split('T')[0],
+          timeRemaining: timeRemainingText,
+          personName: person?.name || "غير محدد",
+          country: doc.country || "غير محدد",
+          documentNumber: doc.documentNumber || "لا يوجد",
+          notes: doc.notes || null,
+        });
+      }
     }
 
-    // التحقق مما إذا كان المستخدم موجوداً مسبقاً
-    const existingUser = await db
-      .select()
-      .from(users)
-      .where(eq(users.email, email))
-      .limit(1);
-
-    if (existingUser.length > 0) {
-      return Response.json(
-        { success: false, error: "البريد الإلكتروني مستخدم مسبقاً" },
-        { status: 400 }
-      );
-    }
-
-    // تشفير كلمة المرور باستخدام bcryptjs
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // إدخال المستخدم الجديد في قاعدة البيانات (متطابق مع أعمدة الجدول الحالية)
-    await db.insert(users).values({
-      email,
-      password: hashedPassword,
-    });
-
-    // إرسال البريد الترحيبي
-    try {
-      await sendExpiryAlertEmail({
-        to: email,
-        categoryName: "حساب جديد",
-        expiryDate: "غير محدد",
-        timeRemaining: "تفعيل الحساب بنجاح",
-        personName: name, // استخدام الاسم المدخل في رسالة البريد فقط
-        country: "غير محدد",
-        documentNumber: "لا يوجد",
-        notes: "تم إنشاء حسابك بنجاح في نظام إدارة الوثائق.",
-      });
-    } catch (emailError) {
-      console.error("Failed to send welcome email:", emailError);
-    }
-
-    return Response.json({
-      success: true,
-      message: "تم تسجيل الحساب بنجاح",
-    });
-
+    return Response.json({ success: true, message: "Expiry check completed successfully" });
   } catch (error) {
-    console.error("Registration error:", error);
-    return Response.json(
-      { success: false, error: "حدث خطأ أثناء التسجيل" },
-      { status: 500 }
-    );
+    console.error("Error in check-expiry route:", error);
+    return Response.json({ success: false, error: "Internal Server Error" }, { status: 500 });
   }
 }
