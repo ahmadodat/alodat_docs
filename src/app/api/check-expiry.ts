@@ -1,15 +1,15 @@
 import { db } from "@/db";
 import { documents, users } from "@/db/schema";
 import { eq } from "drizzle-orm";
-import { sendExpiryAlertEmail } from "@/lib/mail";
+import { sendExpiryAlertEmail } from "@/lib/mail"; //[cite: 2]
 
 export async function GET(request: Request) {
   try {
-    // 1. جلب كل الوثائق من قاعدة البيانات مع بيانات المستخدمين المرتبطين بها
+    // 1. جلب كل الوثائق والمستخدمين من قاعدة البيانات
     const allDocuments = await db.select().from(documents);
     const allUsers = await db.select().from(users);
     
-    // ربط الوثائق بالمستخدمين للحصول على البريد الإلكتروني لكل وثيقة
+    // ربط معرف المستخدم بالبريد الإلكتروني الخاص به
     const userMap = new Map(allUsers.map(u => [u.id, u.email]));
 
     const today = new Date();
@@ -34,7 +34,7 @@ export async function GET(request: Request) {
         if (userEmail) {
           const timeRemainingText = diffDays === 90 ? "3 أشهر" : "شهر واحد";
 
-          // إرسال البريد الإلكتروني باستخدام دالة mail.ts الموجودة لديك
+          // استخدام دالة الإرسال الموجودة في ملف mail.ts[cite: 2]
           await sendExpiryAlertEmail({
             to: userEmail,
             documentName: doc.title || "وثيقة بدون عنوان",
