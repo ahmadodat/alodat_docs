@@ -39,7 +39,20 @@ export async function sendExpiryAlertEmail({
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
   <title>تنبيه انتهاء الوثيقة</title>
+
+  <style>
+    body,
+    table,
+    td,
+    div,
+    p,
+    span {
+      font-family: Tahoma, Arial, sans-serif !important;
+    }
+  </style>
+
 </head>
 
 <body
@@ -48,7 +61,7 @@ export async function sendExpiryAlertEmail({
     margin:0;
     padding:0;
     background:#f5f6f8;
-    font-family:Arial,Tahoma,sans-serif;
+    font-family:Tahoma,Arial,sans-serif;
     color:#1f2937;
     direction:rtl;
     text-align:right;
@@ -65,6 +78,7 @@ export async function sendExpiryAlertEmail({
     width:100%;
     padding:22px 12px;
     direction:rtl;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
 <tr>
@@ -84,6 +98,7 @@ export async function sendExpiryAlertEmail({
     border-radius:10px;
     overflow:hidden;
     direction:rtl;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
 
@@ -97,6 +112,7 @@ export async function sendExpiryAlertEmail({
     border-bottom:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
 
@@ -106,7 +122,10 @@ export async function sendExpiryAlertEmail({
   cellspacing="0"
   border="0"
   dir="rtl"
-  style="direction:rtl;"
+  style="
+    direction:rtl;
+    font-family:Tahoma,Arial,sans-serif;
+  "
 >
 <tr>
 
@@ -118,6 +137,7 @@ export async function sendExpiryAlertEmail({
   style="
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
 
@@ -127,6 +147,7 @@ export async function sendExpiryAlertEmail({
     font-weight:bold;
     color:#2563eb;
     direction:rtl;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   نظام إدارة الوثائق الشخصية
@@ -142,6 +163,7 @@ export async function sendExpiryAlertEmail({
   style="
     direction:rtl;
     text-align:left;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
 
@@ -155,6 +177,7 @@ export async function sendExpiryAlertEmail({
     padding:4px 8px;
     border-radius:5px;
     direction:rtl;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   تنبيه
@@ -178,6 +201,7 @@ export async function sendExpiryAlertEmail({
     padding:20px;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
 
@@ -192,6 +216,7 @@ export async function sendExpiryAlertEmail({
   style="
     direction:rtl;
     margin-bottom:12px;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
 <tr>
@@ -203,6 +228,7 @@ export async function sendExpiryAlertEmail({
   style="
     padding-left:9px;
     direction:rtl;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
 
@@ -215,6 +241,7 @@ export async function sendExpiryAlertEmail({
     background:#fef2f2;
     border-radius:8px;
     font-size:18px;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   ⚠️
@@ -231,6 +258,7 @@ export async function sendExpiryAlertEmail({
   style="
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
 
@@ -241,6 +269,7 @@ export async function sendExpiryAlertEmail({
     line-height:1.5;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   تنبيه انتهاء الوثيقة
@@ -266,6 +295,7 @@ export async function sendExpiryAlertEmail({
     border-radius:7px;
     overflow:hidden;
     direction:rtl;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
 
@@ -284,6 +314,7 @@ export async function sendExpiryAlertEmail({
     font-size:12px;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   نوع الوثيقة
@@ -297,6 +328,7 @@ export async function sendExpiryAlertEmail({
     font-weight:bold;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   ${categoryName}
@@ -319,6 +351,7 @@ export async function sendExpiryAlertEmail({
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   تاريخ الانتهاء
@@ -334,6 +367,7 @@ export async function sendExpiryAlertEmail({
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   ${expiryDate}
@@ -356,6 +390,7 @@ export async function sendExpiryAlertEmail({
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   الوقت المتبقي
@@ -371,6 +406,7 @@ export async function sendExpiryAlertEmail({
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   ${timeRemaining}
@@ -396,6 +432,7 @@ ${
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   رقم الوثيقة
@@ -409,6 +446,7 @@ ${
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   ${documentNumber}
@@ -437,6 +475,7 @@ ${
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   صاحب الوثيقة
@@ -450,6 +489,7 @@ ${
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   ${personName}
@@ -478,6 +518,7 @@ ${
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   الدولة
@@ -491,6 +532,7 @@ ${
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   ${country}
@@ -522,6 +564,7 @@ ${
     line-height:1.5;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   ${notes}
@@ -546,6 +589,7 @@ ${
     line-height:1.6;
     direction:rtl;
     text-align:right;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
   <strong>تذكير:</strong>
@@ -571,6 +615,7 @@ ${
     color:#9ca3af;
     line-height:1.5;
     direction:rtl;
+    font-family:Tahoma,Arial,sans-serif;
   "
 >
 
