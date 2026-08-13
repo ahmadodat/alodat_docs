@@ -360,6 +360,8 @@ export async function sendExpiryAlertEmail({
 
 <tr>
 
+<!-- اليسار: عادي -->
+
 <td
   width="38%"
   dir="rtl"
@@ -369,6 +371,7 @@ export async function sendExpiryAlertEmail({
     background:#f9fafb;
     color:#6b7280;
     font-size:13px;
+    font-weight:normal;
     direction:rtl;
     text-align:right;
     font-family:Arial,sans-serif;
@@ -376,6 +379,8 @@ export async function sendExpiryAlertEmail({
 >
   نوع الوثيقة
 </td>
+
+<!-- اليمين: Bold -->
 
 <td
   dir="rtl"
@@ -398,6 +403,8 @@ export async function sendExpiryAlertEmail({
 
 <tr>
 
+<!-- اليسار: عادي -->
+
 <td
   dir="rtl"
   style="
@@ -405,6 +412,7 @@ export async function sendExpiryAlertEmail({
     background:#f9fafb;
     color:#6b7280;
     font-size:13px;
+    font-weight:normal;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -413,6 +421,8 @@ export async function sendExpiryAlertEmail({
 >
   تاريخ الانتهاء
 </td>
+
+<!-- اليمين: Bold -->
 
 <td
   dir="rtl"
@@ -437,6 +447,8 @@ export async function sendExpiryAlertEmail({
 
 <tr>
 
+<!-- اليسار: عادي -->
+
 <td
   dir="rtl"
   style="
@@ -444,6 +456,7 @@ export async function sendExpiryAlertEmail({
     background:#f9fafb;
     color:#6b7280;
     font-size:13px;
+    font-weight:normal;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -452,6 +465,8 @@ export async function sendExpiryAlertEmail({
 >
   الوقت المتبقي
 </td>
+
+<!-- اليمين: Bold -->
 
 <td
   dir="rtl"
@@ -479,6 +494,8 @@ ${
     ? `
 <tr>
 
+<!-- اليسار: عادي -->
+
 <td
   dir="rtl"
   style="
@@ -486,6 +503,7 @@ ${
     background:#f9fafb;
     color:#6b7280;
     font-size:13px;
+    font-weight:normal;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -495,11 +513,14 @@ ${
   رقم الوثيقة
 </td>
 
+<!-- اليمين: Bold -->
+
 <td
   dir="rtl"
   style="
     padding:10px 12px;
     font-size:14px;
+    font-weight:bold;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -522,6 +543,8 @@ ${
     ? `
 <tr>
 
+<!-- اليسار: عادي -->
+
 <td
   dir="rtl"
   style="
@@ -529,6 +552,7 @@ ${
     background:#f9fafb;
     color:#6b7280;
     font-size:13px;
+    font-weight:normal;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -538,11 +562,14 @@ ${
   صاحب الوثيقة
 </td>
 
+<!-- اليمين: Bold -->
+
 <td
   dir="rtl"
   style="
     padding:10px 12px;
     font-size:14px;
+    font-weight:bold;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -565,6 +592,8 @@ ${
     ? `
 <tr>
 
+<!-- اليسار: عادي -->
+
 <td
   dir="rtl"
   style="
@@ -572,6 +601,7 @@ ${
     background:#f9fafb;
     color:#6b7280;
     font-size:13px;
+    font-weight:normal;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -581,11 +611,14 @@ ${
   الدولة
 </td>
 
+<!-- اليمين: Bold -->
+
 <td
   dir="rtl"
   style="
     padding:10px 12px;
     font-size:14px;
+    font-weight:bold;
     border-top:1px solid #eeeeee;
     direction:rtl;
     text-align:right;
@@ -617,6 +650,7 @@ ${
     border-right:3px solid #f59e0b;
     border-radius:4px;
     font-size:13px;
+    font-weight:normal;
     color:#92400e;
     line-height:1.6;
     direction:rtl;
@@ -647,6 +681,7 @@ ${
     border-top:1px solid #eeeeee;
     text-align:center;
     font-size:11px;
+    font-weight:normal;
     color:#9ca3af;
     line-height:1.5;
     direction:rtl;
