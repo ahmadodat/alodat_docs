@@ -191,7 +191,7 @@ export async function sendExpiryAlertEmail({
   dir="rtl"
   style="
     direction:rtl;
-    margin-bottom:5px;
+    margin-bottom:12px;
   "
 >
 <tr>
@@ -226,7 +226,7 @@ export async function sendExpiryAlertEmail({
 <!-- العنوان -->
 
 <td
-  valign="top"
+  valign="middle"
   dir="rtl"
   style="
     direction:rtl;
@@ -244,18 +244,6 @@ export async function sendExpiryAlertEmail({
   "
 >
   تنبيه انتهاء الوثيقة
-</div>
-
-<div
-  style="
-    font-size:12px;
-    color:#6b7280;
-    line-height:1.6;
-    direction:rtl;
-    text-align:right;
-  "
->
-  يرجى مراجعة بيانات الوثيقة قبل انتهاء صلاحيتها.
 </div>
 
 </td>
