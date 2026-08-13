@@ -12,9 +12,11 @@ export async function GET(request: Request) {
 
   const today = new Date();
   
+  // حساب تاريخ بعد 3 أشهر (90 يوماً)
   const threeMonthsFromNow = new Date();
   threeMonthsFromNow.setDate(today.getDate() + 90);
   
+  // حساب تاريخ بعد شهر واحد (30 يوماً)
   const oneMonthFromNow = new Date();
   oneMonthFromNow.setDate(today.getDate() + 30);
 
@@ -27,13 +29,18 @@ export async function GET(request: Request) {
 
     const expiryDate = new Date(doc.documents.expiryDate);
     
+    // التحقق مما إذا كان تاريخ الانتهاء يوافق تماماً بعد 3 أشهر أو بعد شهر واحد
     if (expiryDate.toDateString() === threeMonthsFromNow.toDateString() || 
         expiryDate.toDateString() === oneMonthFromNow.toDateString()) {
       
+      const periodText = expiryDate.toDateString() === threeMonthsFromNow.toDateString() 
+        ? "3 أشهر" 
+        : "شهر واحد";
+
       await sendNotificationEmail(
         doc.users.email,
-        "Document Expiry Reminder",
-        `Hello, this is a reminder that your document (Number: ${doc.documents.documentNumber || 'N/A'}) is expiring on ${doc.documents.expiryDate}. Please take necessary action.`
+        "تنبيه: اقتراب موعد انتهاء الوثيقة",
+        `مرحباً، هذا تذكير بأن وثيقتك (رقم الوثيقة: ${doc.documents.documentNumber || 'غير متوفر'}) ستنتهي خلال ${periodText} (بتاريخ: ${doc.documents.expiryDate}). يرجى اتخاذ الإجراء اللازم والتجديد في أقرب وقت.`
       );
     }
   }
