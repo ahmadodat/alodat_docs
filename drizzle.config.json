@@ -1,0 +1,11 @@
+{
+  "schema": "./src/db/schema.ts",
+  "out": "./drizzle",
+  "dialect": "mysql",
+  "dbCredentials": {
+    "host": "srv1252.hstgr.io",
+    "user": "u418912083_alodat_docs",
+    "password": "7$Du|mm05e^N",
+    "database": "u418912083_alodat_docs"
+  }
+}
