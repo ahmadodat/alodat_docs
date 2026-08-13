@@ -33,7 +33,7 @@ export async function GET(request: Request) {
       await sendNotificationEmail(
         doc.users.email,
         "Document Expiry Reminder",
-        `Hello, this is a reminder that your document "${doc.documents.name}" is expiring on ${doc.documents.expiryDate}. Please take necessary action.`
+        `Hello, this is a reminder that your document (Number: ${doc.documents.documentNumber || 'N/A'}) is expiring on ${doc.documents.expiryDate}. Please take necessary action.`
       );
     }
   }
