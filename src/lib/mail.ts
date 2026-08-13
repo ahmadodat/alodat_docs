@@ -2,11 +2,135 @@ import { Resend } from 'resend';
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+/**
+ * حساب الوقت المتبقي حتى انتهاء الوثيقة
+ *
+ * يدعم:
+ * 2026-08-25
+ * 2026-08-25T23:59:59
+ * 2026-08-25T23:59:59Z
+ */
+function getTimeRemaining(expiryDate: string): string {
+  const now = new Date();
+  const expiry = new Date(expiryDate);
+
+  // التأكد من صحة التاريخ
+  if (isNaN(expiry.getTime())) {
+    return 'تاريخ غير صالح';
+  }
+
+  let diff = expiry.getTime() - now.getTime();
+
+  // ==========================================
+  // الوثيقة منتهية
+  // ==========================================
+
+  if (diff <= 0) {
+    diff = Math.abs(diff);
+
+    const days = Math.floor(
+      diff / (1000 * 60 * 60 * 24)
+    );
+
+    diff %= 1000 * 60 * 60 * 24;
+
+    const hours = Math.floor(
+      diff / (1000 * 60 * 60)
+    );
+
+    diff %= 1000 * 60 * 60;
+
+    const minutes = Math.floor(
+      diff / (1000 * 60)
+    );
+
+    if (days > 0) {
+      return `منتهية منذ ${days} ${days === 1 ? 'يوم' : 'أيام'}${
+        hours > 0
+          ? ` و${hours} ${hours === 1 ? 'ساعة' : 'ساعات'}`
+          : ''
+      }`;
+    }
+
+    if (hours > 0) {
+      return `منتهية منذ ${hours} ${
+        hours === 1 ? 'ساعة' : 'ساعات'
+      }`;
+    }
+
+    if (minutes > 0) {
+      return `منتهية منذ ${minutes} ${
+        minutes === 1 ? 'دقيقة' : 'دقائق'
+      }`;
+    }
+
+    return 'منتهية الآن';
+  }
+
+  // ==========================================
+  // الوثيقة لم تنتهِ
+  // ==========================================
+
+  const days = Math.floor(
+    diff / (1000 * 60 * 60 * 24)
+  );
+
+  diff %= 1000 * 60 * 60 * 24;
+
+  const hours = Math.floor(
+    diff / (1000 * 60 * 60)
+  );
+
+  diff %= 1000 * 60 * 60;
+
+  const minutes = Math.floor(
+    diff / (1000 * 60)
+  );
+
+  // أكثر من يوم
+  if (days > 0) {
+    return `متبقي ${days} ${
+      days === 1 ? 'يوم' : 'أيام'
+    }${
+      hours > 0
+        ? ` و${hours} ${
+            hours === 1 ? 'ساعة' : 'ساعات'
+          }`
+        : ''
+    }`;
+  }
+
+  // أقل من يوم وأكثر من ساعة
+  if (hours > 0) {
+    return `متبقي ${hours} ${
+      hours === 1 ? 'ساعة' : 'ساعات'
+    }${
+      minutes > 0
+        ? ` و${minutes} ${
+            minutes === 1 ? 'دقيقة' : 'دقائق'
+          }`
+        : ''
+    }`;
+  }
+
+  // أقل من ساعة
+  if (minutes > 0) {
+    return `متبقي ${minutes} ${
+      minutes === 1 ? 'دقيقة' : 'دقائق'
+    }`;
+  }
+
+  return 'متبقي أقل من دقيقة';
+}
+
+
+/**
+ * إرسال رسالة تنبيه انتهاء الوثيقة
+ */
 export async function sendExpiryAlertEmail({
   to,
   categoryName,
   expiryDate,
-  timeRemaining,
   personName,
   country,
   documentNumber,
@@ -15,27 +139,55 @@ export async function sendExpiryAlertEmail({
   to: string;
   categoryName: string;
   expiryDate: string;
-  timeRemaining: string;
   personName?: string;
   country?: string;
   documentNumber?: string;
   notes?: string | null;
 }) {
   try {
+
+    // حساب الوقت المتبقي تلقائياً
+    const timeRemaining = getTimeRemaining(expiryDate);
+
+    // هل الوثيقة منتهية؟
+    const isExpired =
+      new Date(expiryDate).getTime() <= Date.now();
+
     await resend.emails.send({
-      from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
+
+      from:
+        process.env.EMAIL_FROM ||
+        'onboarding@resend.dev',
+
       to: [to],
 
-      subject: `تنبيه انتهاء ${categoryName}`,
+      subject: isExpired
+        ? `⚠️ وثيقة ${categoryName} منتهية`
+        : `⚠️ تنبيه: وثيقة ${categoryName} على وشك الانتهاء`,
 
       html: `
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+
+<html
+  lang="ar"
+  dir="rtl"
+>
 
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta
+  name="viewport"
+  content="width=device-width, initial-scale=1.0"
+>
+
+<title>
+تنبيه انتهاء الوثيقة
+</title>
+
 </head>
+
 
 <body
   dir="rtl"
@@ -43,12 +195,16 @@ export async function sendExpiryAlertEmail({
     margin:0;
     padding:0;
     background:#f4f6f8;
-    font-family:Arial,Tahoma,sans-serif;
+    font-family:
+      Arial,
+      Tahoma,
+      sans-serif;
     direction:rtl;
     text-align:right;
     color:#1f2937;
   "
 >
+
 
 <table
   width="100%"
@@ -57,14 +213,18 @@ export async function sendExpiryAlertEmail({
   border="0"
   dir="rtl"
   style="
-    direction:rtl;
+    width:100%;
     padding:25px 12px;
+    direction:rtl;
   "
 >
 
 <tr>
 
 <td align="center">
+
+
+<!-- MAIN CONTAINER -->
 
 <table
   width="500"
@@ -84,7 +244,7 @@ export async function sendExpiryAlertEmail({
 >
 
 
-<!-- HEADER -->
+<!-- ================= HEADER ================= -->
 
 <tr>
 
@@ -102,15 +262,23 @@ export async function sendExpiryAlertEmail({
   width="100%"
   cellpadding="0"
   cellspacing="0"
+  border="0"
   dir="rtl"
-  style="direction:rtl;"
+  style="
+    direction:rtl;
+  "
 >
 
 <tr>
 
+
+<!-- LOGO -->
+
 <td
   align="right"
-  style="text-align:right;"
+  style="
+    text-align:right;
+  "
 >
 
 <div
@@ -135,22 +303,28 @@ export async function sendExpiryAlertEmail({
 
 </td>
 
+
+<!-- STATUS -->
+
 <td
   align="left"
-  style="text-align:left;"
+  style="
+    text-align:left;
+  "
 >
 
 <span
   style="
     font-size:11px;
     font-weight:bold;
-    color:#dc2626;
+    color:${isExpired ? '#dc2626' : '#d97706'};
   "
 >
-  تنبيه
+  ${isExpired ? 'منتهية' : 'تنبيه'}
 </span>
 
 </td>
+
 
 </tr>
 
@@ -161,7 +335,7 @@ export async function sendExpiryAlertEmail({
 </tr>
 
 
-<!-- CONTENT -->
+<!-- ================= CONTENT ================= -->
 
 <tr>
 
@@ -186,8 +360,9 @@ export async function sendExpiryAlertEmail({
     text-align:right;
   "
 >
-  تنبيه انتهاء الوثيقة
+  ${isExpired ? 'الوثيقة منتهية' : 'تنبيه انتهاء الوثيقة'}
 </div>
+
 
 <div
   style="
@@ -198,11 +373,15 @@ export async function sendExpiryAlertEmail({
     text-align:right;
   "
 >
-  يرجى مراجعة الوثيقة قبل انتهاء صلاحيتها.
+  ${
+    isExpired
+      ? 'نود إعلامك بأن الوثيقة التالية قد انتهت صلاحيتها.'
+      : 'نود إعلامك بأن الوثيقة التالية ستنتهي قريباً.'
+  }
 </div>
 
 
-<!-- DETAILS -->
+<!-- ================= DOCUMENT DETAILS ================= -->
 
 <table
   width="100%"
@@ -255,11 +434,12 @@ export async function sendExpiryAlertEmail({
 </tr>
 
 
-<!-- EXPIRY -->
+<!-- EXPIRY DATE -->
 
 <tr>
 
 <td
+  width="38%"
   align="right"
   style="
     padding:9px 12px;
@@ -290,11 +470,12 @@ export async function sendExpiryAlertEmail({
 </tr>
 
 
-<!-- REMAINING -->
+<!-- TIME REMAINING -->
 
 <tr>
 
 <td
+  width="38%"
   align="right"
   style="
     padding:9px 12px;
@@ -305,7 +486,7 @@ export async function sendExpiryAlertEmail({
     border-bottom:1px solid #eeeeee;
   "
 >
-  الوقت المتبقي
+  الحالة
 </td>
 
 <td
@@ -314,7 +495,7 @@ export async function sendExpiryAlertEmail({
     padding:9px 12px;
     font-size:13px;
     font-weight:bold;
-    color:#dc2626;
+    color:${isExpired ? '#dc2626' : '#d97706'};
     text-align:right;
     border-bottom:1px solid #eeeeee;
   "
@@ -333,6 +514,7 @@ ${
 <tr>
 
 <td
+  width="38%"
   align="right"
   style="
     padding:9px 12px;
@@ -372,6 +554,7 @@ ${
 <tr>
 
 <td
+  width="38%"
   align="right"
   style="
     padding:9px 12px;
@@ -411,6 +594,7 @@ ${
 <tr>
 
 <td
+  width="38%"
   align="right"
   style="
     padding:9px 12px;
@@ -443,7 +627,7 @@ ${
 </table>
 
 
-<!-- NOTES -->
+<!-- ================= NOTES ================= -->
 
 ${
   notes
@@ -455,7 +639,6 @@ ${
     padding:9px 12px;
     background:#fffbeb;
     border-right:3px solid #f59e0b;
-    border-left:0;
     border-radius:5px;
     font-size:11px;
     line-height:1.7;
@@ -464,15 +647,20 @@ ${
     direction:rtl;
   "
 >
-  <strong>ملاحظة:</strong>
-  ${notes}
+
+<strong>
+ملاحظة:
+</strong>
+
+${notes}
+
 </div>
 `
     : ''
 }
 
 
-<!-- BUTTON -->
+<!-- ================= BUTTON ================= -->
 
 <div
   style="
@@ -505,7 +693,7 @@ ${
 </tr>
 
 
-<!-- FOOTER -->
+<!-- ================= FOOTER ================= -->
 
 <tr>
 
@@ -536,13 +724,20 @@ ${
 
 </table>
 
+
 </body>
+
 </html>
       `,
     });
 
   } catch (error) {
-    console.error("Error sending email:", error);
+
+    console.error(
+      'Error sending email:',
+      error
+    );
+
     throw error;
   }
 }
