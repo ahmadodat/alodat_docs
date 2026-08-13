@@ -1,1 +1,20 @@
+name: Daily Expiry Check
 
+# متى يتم تشغيل هذا السكربت؟
+on:
+  schedule:
+    # صيغة الكرون (Cron): يعمل يومياً الساعة 8:00 صباحاً بتوقيت UTC
+    - cron: '0 8 * * *'
+  
+  # هذا السطر مهم جداً: يضيف زراً في لوحة تحكم GitHub لتشغيل السكربت يدوياً متى شئت للتجربة
+  workflow_dispatch: 
+
+jobs:
+  run-api-route:
+    runs-on: ubuntu-latest # الخادم الوهمي الذي سيشغل الأمر
+    
+    steps:
+      - name: Hit the Check Expiry API Endpoint
+        # أمر curl يقوم بزيارة الرابط الخاص بك لتشغيل الكود الموجود فيه
+        run: |
+          curl -X GET "https://alodat.net/api/cron/check-expiry"
