@@ -17,5 +17,5 @@ jobs:
       - name: Hit the Check Expiry API Endpoint
         # تم تعديل الرابط ليوجه إلى مسار الـ API الصحيح لفحص الوثائق
         run: |
-          curl -X GET "https://alodat-docs.vercel.app/api/cron/check-expiry" \
+          curl -X GET "https://alodat-docs.vercel.app/api/cron/check-expiry/route.ts" \
           -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
