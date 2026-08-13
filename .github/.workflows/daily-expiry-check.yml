@@ -3,18 +3,19 @@ name: Daily Expiry Check
 # متى يتم تشغيل هذا السكربت؟
 on:
   schedule:
-    # صيغة الكرون (Cron): يعمل يومياً الساعة 8:00 صباحاً بتوقيت UTC
+    # يعمل يومياً الساعة 8:00 صباحاً بتوقيت UTC
     - cron: '0 8 * * *'
   
-  # هذا السطر مهم جداً: يضيف زراً في لوحة تحكم GitHub لتشغيل السكربت يدوياً متى شئت للتجربة
+  # يضيف زراً في لوحة تحكم GitHub لتشغيل السكربت يدوياً متى شئت للتجربة
   workflow_dispatch: 
 
 jobs:
   run-api-route:
-    runs-on: ubuntu-latest # الخادم الوهمي الذي سيشغل الأمر
+    runs-on: ubuntu-latest
     
     steps:
       - name: Hit the Check Expiry API Endpoint
-        # أمر curl يقوم بزيارة الرابط الخاص بك لتشغيل الكود الموجود فيه
+        # تم تعديل الرابط ليوجه إلى مسار الـ API الصحيح لفحص الوثائق
         run: |
-          curl -X GET "https://alodat-docs.vercel.app/"
+          curl -X GET "https://alodat-docs.vercel.app/api/cron/check-expiry" \
+          -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
