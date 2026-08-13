@@ -26,7 +26,7 @@ export async function sendExpiryAlertEmail({
       from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: [to],
 
-      subject: `تنبيه: ${categoryName} على وشك الانتهاء`,
+      subject: `تنبيه انتهاء ${categoryName}`,
 
       html: `
 <!DOCTYPE html>
@@ -37,34 +37,49 @@ export async function sendExpiryAlertEmail({
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 
-<body style="
-  margin:0;
-  padding:0;
-  background:#f5f6f8;
-  font-family:Arial,Tahoma,sans-serif;
-  color:#1f2937;
-">
+<body
+  dir="rtl"
+  style="
+    margin:0;
+    padding:0;
+    background:#f4f6f8;
+    font-family:Arial,Tahoma,sans-serif;
+    direction:rtl;
+    text-align:right;
+    color:#1f2937;
+  "
+>
 
 <table
   width="100%"
   cellpadding="0"
   cellspacing="0"
-  style="padding:25px 12px;"
+  border="0"
+  dir="rtl"
+  style="
+    direction:rtl;
+    padding:25px 12px;
+  "
 >
+
 <tr>
+
 <td align="center">
 
 <table
-  width="520"
+  width="500"
   cellpadding="0"
   cellspacing="0"
+  border="0"
+  dir="rtl"
   style="
     width:100%;
-    max-width:520px;
+    max-width:500px;
     background:#ffffff;
     border:1px solid #e5e7eb;
     border-radius:10px;
     overflow:hidden;
+    direction:rtl;
   "
 >
 
@@ -72,66 +87,117 @@ export async function sendExpiryAlertEmail({
 <!-- HEADER -->
 
 <tr>
-<td style="
-  padding:18px 22px;
-  border-bottom:1px solid #eeeeee;
-">
 
-<table width="100%" cellpadding="0" cellspacing="0">
+<td
+  dir="rtl"
+  style="
+    padding:17px 20px;
+    border-bottom:1px solid #eeeeee;
+    direction:rtl;
+    text-align:right;
+  "
+>
+
+<table
+  width="100%"
+  cellpadding="0"
+  cellspacing="0"
+  dir="rtl"
+  style="direction:rtl;"
+>
+
 <tr>
 
-<td>
+<td
+  align="right"
+  style="text-align:right;"
+>
 
-<div style="
-  font-size:17px;
-  font-weight:bold;
-  color:#2563eb;
-">
+<div
+  style="
+    font-size:17px;
+    font-weight:bold;
+    color:#2563eb;
+  "
+>
   ALODAT
+</div>
+
+<div
+  style="
+    font-size:10px;
+    color:#9ca3af;
+    margin-top:2px;
+  "
+>
+  نظام إدارة الوثائق
 </div>
 
 </td>
 
-<td align="left">
+<td
+  align="left"
+  style="text-align:left;"
+>
 
-<div style="
-  font-size:11px;
-  color:#dc2626;
-  font-weight:bold;
-">
+<span
+  style="
+    font-size:11px;
+    font-weight:bold;
+    color:#dc2626;
+  "
+>
   تنبيه
-</div>
+</span>
 
 </td>
 
 </tr>
+
 </table>
 
 </td>
+
 </tr>
 
 
 <!-- CONTENT -->
 
 <tr>
-<td style="
-  padding:22px;
-">
+
+<td
+  dir="rtl"
+  style="
+    padding:22px 20px;
+    direction:rtl;
+    text-align:right;
+  "
+>
 
 
-<div style="
-  font-size:20px;
-  font-weight:bold;
-  margin-bottom:7px;
-">
+<!-- TITLE -->
+
+<div
+  style="
+    font-size:20px;
+    font-weight:bold;
+    color:#111827;
+    margin-bottom:5px;
+    text-align:right;
+  "
+>
   تنبيه انتهاء الوثيقة
 </div>
 
-<div style="
-  font-size:13px;
-  color:#6b7280;
-  margin-bottom:18px;
-">
+<div
+  style="
+    font-size:12px;
+    color:#6b7280;
+    line-height:1.7;
+    margin-bottom:16px;
+    text-align:right;
+  "
+>
   يرجى مراجعة الوثيقة قبل انتهاء صلاحيتها.
 </div>
 
@@ -142,106 +208,153 @@ export async function sendExpiryAlertEmail({
   width="100%"
   cellpadding="0"
   cellspacing="0"
+  border="0"
+  dir="rtl"
   style="
+    width:100%;
     border:1px solid #e5e7eb;
     border-radius:7px;
     overflow:hidden;
+    direction:rtl;
   "
 >
 
+
+<!-- CATEGORY -->
+
 <tr>
 
-<td style="
-  padding:10px 13px;
-  background:#f9fafb;
-  color:#6b7280;
-  font-size:12px;
-  width:38%;
-">
+<td
+  width="38%"
+  align="right"
+  style="
+    padding:9px 12px;
+    background:#f8fafc;
+    color:#6b7280;
+    font-size:12px;
+    text-align:right;
+    border-bottom:1px solid #eeeeee;
+  "
+>
   نوع الوثيقة
 </td>
 
-<td style="
-  padding:10px 13px;
-  font-size:13px;
-  font-weight:bold;
-">
+<td
+  align="right"
+  style="
+    padding:9px 12px;
+    font-size:13px;
+    font-weight:bold;
+    text-align:right;
+    border-bottom:1px solid #eeeeee;
+  "
+>
   ${categoryName}
 </td>
 
 </tr>
 
 
+<!-- EXPIRY -->
+
 <tr>
 
-<td style="
-  padding:10px 13px;
-  background:#f9fafb;
-  color:#6b7280;
-  font-size:12px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  align="right"
+  style="
+    padding:9px 12px;
+    background:#f8fafc;
+    color:#6b7280;
+    font-size:12px;
+    text-align:right;
+    border-bottom:1px solid #eeeeee;
+  "
+>
   تاريخ الانتهاء
 </td>
 
-<td style="
-  padding:10px 13px;
-  font-size:13px;
-  font-weight:bold;
-  color:#dc2626;
-  border-top:1px solid #eeeeee;
-">
+<td
+  align="right"
+  style="
+    padding:9px 12px;
+    font-size:13px;
+    font-weight:bold;
+    color:#dc2626;
+    text-align:right;
+    border-bottom:1px solid #eeeeee;
+  "
+>
   ${expiryDate}
 </td>
 
 </tr>
 
 
+<!-- REMAINING -->
+
 <tr>
 
-<td style="
-  padding:10px 13px;
-  background:#f9fafb;
-  color:#6b7280;
-  font-size:12px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  align="right"
+  style="
+    padding:9px 12px;
+    background:#f8fafc;
+    color:#6b7280;
+    font-size:12px;
+    text-align:right;
+    border-bottom:1px solid #eeeeee;
+  "
+>
   الوقت المتبقي
 </td>
 
-<td style="
-  padding:10px 13px;
-  font-size:13px;
-  font-weight:bold;
-  color:#dc2626;
-  border-top:1px solid #eeeeee;
-">
+<td
+  align="right"
+  style="
+    padding:9px 12px;
+    font-size:13px;
+    font-weight:bold;
+    color:#dc2626;
+    text-align:right;
+    border-bottom:1px solid #eeeeee;
+  "
+>
   ${timeRemaining}
 </td>
 
 </tr>
 
 
+<!-- DOCUMENT NUMBER -->
+
 ${
   documentNumber
     ? `
 <tr>
 
-<td style="
-  padding:10px 13px;
-  background:#f9fafb;
-  color:#6b7280;
-  font-size:12px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  align="right"
+  style="
+    padding:9px 12px;
+    background:#f8fafc;
+    color:#6b7280;
+    font-size:12px;
+    text-align:right;
+    border-bottom:1px solid #eeeeee;
+  "
+>
   رقم الوثيقة
 </td>
 
-<td style="
-  padding:10px 13px;
-  font-size:13px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  align="right"
+  style="
+    padding:9px 12px;
+    font-size:13px;
+    text-align:right;
+    border-bottom:1px solid #eeeeee;
+  "
+>
   ${documentNumber}
 </td>
 
@@ -251,26 +364,36 @@ ${
 }
 
 
+<!-- PERSON -->
+
 ${
   personName
     ? `
 <tr>
 
-<td style="
-  padding:10px 13px;
-  background:#f9fafb;
-  color:#6b7280;
-  font-size:12px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  align="right"
+  style="
+    padding:9px 12px;
+    background:#f8fafc;
+    color:#6b7280;
+    font-size:12px;
+    text-align:right;
+    border-bottom:1px solid #eeeeee;
+  "
+>
   صاحب الوثيقة
 </td>
 
-<td style="
-  padding:10px 13px;
-  font-size:13px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  align="right"
+  style="
+    padding:9px 12px;
+    font-size:13px;
+    text-align:right;
+    border-bottom:1px solid #eeeeee;
+  "
+>
   ${personName}
 </td>
 
@@ -280,26 +403,34 @@ ${
 }
 
 
+<!-- COUNTRY -->
+
 ${
   country
     ? `
 <tr>
 
-<td style="
-  padding:10px 13px;
-  background:#f9fafb;
-  color:#6b7280;
-  font-size:12px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  align="right"
+  style="
+    padding:9px 12px;
+    background:#f8fafc;
+    color:#6b7280;
+    font-size:12px;
+    text-align:right;
+  "
+>
   الدولة
 </td>
 
-<td style="
-  padding:10px 13px;
-  font-size:13px;
-  border-top:1px solid #eeeeee;
-">
+<td
+  align="right"
+  style="
+    padding:9px 12px;
+    font-size:13px;
+    text-align:right;
+  "
+>
   ${country}
 </td>
 
@@ -308,20 +439,32 @@ ${
     : ''
 }
 
+
 </table>
 
+
+<!-- NOTES -->
 
 ${
   notes
     ? `
-<div style="
-  margin-top:12px;
-  padding:9px 12px;
-  background:#fffbeb;
-  border-right:3px solid #f59e0b;
-  font-size:12px;
-  color:#92400e;
-">
+<div
+  dir="rtl"
+  style="
+    margin-top:12px;
+    padding:9px 12px;
+    background:#fffbeb;
+    border-right:3px solid #f59e0b;
+    border-left:0;
+    border-radius:5px;
+    font-size:11px;
+    line-height:1.7;
+    color:#92400e;
+    text-align:right;
+    direction:rtl;
+  "
+>
+  <strong>ملاحظة:</strong>
   ${notes}
 </div>
 `
@@ -331,10 +474,12 @@ ${
 
 <!-- BUTTON -->
 
-<div style="
-  text-align:center;
-  margin-top:18px;
-">
+<div
+  style="
+    text-align:center;
+    margin-top:18px;
+  "
+>
 
 <a
   href="https://alodat.net"
@@ -343,7 +488,7 @@ ${
     background:#2563eb;
     color:#ffffff;
     text-decoration:none;
-    padding:10px 25px;
+    padding:10px 26px;
     border-radius:6px;
     font-size:13px;
     font-weight:bold;
@@ -356,6 +501,7 @@ ${
 
 
 </td>
+
 </tr>
 
 
@@ -363,13 +509,17 @@ ${
 
 <tr>
 
-<td style="
-  padding:12px 20px;
-  border-top:1px solid #eeeeee;
-  text-align:center;
-  font-size:10px;
-  color:#9ca3af;
-">
+<td
+  dir="rtl"
+  style="
+    padding:11px 20px;
+    border-top:1px solid #eeeeee;
+    text-align:center;
+    direction:rtl;
+    font-size:10px;
+    color:#9ca3af;
+  "
+>
 
 رسالة تلقائية من نظام ALODAT — يرجى عدم الرد.
 
@@ -381,7 +531,9 @@ ${
 </table>
 
 </td>
+
 </tr>
+
 </table>
 
 </body>
