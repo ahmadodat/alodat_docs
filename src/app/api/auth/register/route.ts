@@ -33,21 +33,20 @@ export async function POST(request: Request) {
     // تشفير كلمة المرور باستخدام bcryptjs
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // إدخال المستخدم الجديد في قاعدة البيانات
+    // إدخال المستخدم الجديد في قاعدة البيانات (متطابق مع أعمدة الجدول الحالية)
     await db.insert(users).values({
-      name,
       email,
       password: hashedPassword,
     });
 
-    // إرسال البريد الترحيبي بالتنسيق الجديد المتوافق مع الدالة
+    // إرسال البريد الترحيبي
     try {
       await sendExpiryAlertEmail({
         to: email,
         categoryName: "حساب جديد",
         expiryDate: "غير محدد",
         timeRemaining: "تفعيل الحساب بنجاح",
-        personName: name,
+        personName: name, // استخدام الاسم المدخل في رسالة البريد فقط
         country: "غير محدد",
         documentNumber: "لا يوجد",
         notes: "تم إنشاء حسابك بنجاح في نظام إدارة الوثائق.",
