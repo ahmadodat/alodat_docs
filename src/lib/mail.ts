@@ -25,65 +25,69 @@ export async function sendExpiryAlertEmail({
     await resend.emails.send({
       from: process.env.EMAIL_FROM || 'onboarding@resend.dev',
       to: [to],
-      subject: `تنبيه انتهاء الصلاحية: ${categoryName}`,
+      subject: `تنبيه انتهاء صلاحية: ${categoryName}`,
       html: `
-        <div dir="rtl" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 520px; margin: 20px auto; background-color: #ffffff; padding: 30px; border-radius: 12px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); border: 1px solid #eaeaea; text-align: right; color: #333333;">
+        <div dir="rtl" style="font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 520px; margin: 30px auto; background-color: #ffffff; border-radius: 16px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); overflow: hidden; border: 1px solid #edf2f7; text-align: right; color: #2d3748;">
           
-          <!-- الهيدر البسيط -->
-          <div style="margin-bottom: 25px;">
-            <span style="background-color: #fff5f5; color: #e53e3e; padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: bold;">تنبيه عاجل</span>
-            <h2 style="margin: 10px 0 5px 0; font-size: 20px; color: #1a202c; font-weight: 700;">موعد انتهاء وثيقة يقترب</h2>
-            <p style="margin: 0; font-size: 14px; color: #718096;">المتبقي على الانتهاء: <strong style="color: #e53e3e;">${timeRemaining}</strong></p>
+          <!-- شريط ترويجي مودرن داكن -->
+          <div style="background-color: #1a202c; padding: 25px 30px; color: #ffffff;">
+            <div style="display: inline-block; background-color: #e53e3e; color: #ffffff; padding: 3px 10px; border-radius: 4px; font-size: 11px; font-weight: bold; letter-spacing: 0.5px; margin-bottom: 10px;">إشعار عاجل</div>
+            <h2 style="margin: 0; font-size: 18px; font-weight: 600;">اقتراب موعد انتهاء الوثيقة</h2>
+            <p style="margin: 6px 0 0 0; font-size: 13px; color: #a0aec0;">الوقت المتبقي: <span style="color: #f6ad55; font-weight: bold;">${timeRemaining}</span></p>
           </div>
 
-          <!-- الجدول الأول: بيانات الوثيقة -->
-          <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px; background-color: #f7fafc; border-radius: 8px; overflow: hidden;">
-            <tr>
-              <td style="padding: 12px 16px; border-bottom: 1px solid #edf2f7; font-size: 13px; color: #718096; width: 35%;">التصنيف</td>
-              <td style="padding: 12px 16px; border-bottom: 1px solid #edf2f7; font-size: 14px; font-weight: bold; color: #3182ce;">${categoryName}</td>
-            </tr>
-            ${documentNumber ? `
-            <tr>
-              <td style="padding: 12px 16px; border-bottom: 1px solid #edf2f7; font-size: 13px; color: #718096;">رقم الوثيقة</td>
-              <td style="padding: 12px 16px; border-bottom: 1px solid #edf2f7; font-size: 14px; font-weight: 600; color: #2d3748;">${documentNumber}</td>
-            </tr>` : ''}
-            <tr>
-              <td style="padding: 12px 16px; font-size: 13px; color: #718096;">تاريخ الانتهاء</td>
-              <td style="padding: 12px 16px; font-size: 14px; font-weight: bold; color: #e53e3e;">${expiryDate}</td>
-            </tr>
-          </table>
+          <!-- محتوى البطاقة -->
+          <div style="padding: 30px;">
+            <p style="font-size: 14px; color: #4a5568; line-height: 1.6; margin-top: 0; margin-bottom: 20px;">
+              عزيزي المستخدم، نود إعلامك بأن الوثيقة التالية مسجلة لديك وتتطلب إجراءً سريعاً لتجديدها:
+            </p>
 
-          <!-- الجدول الثاني: البيانات الشخصية -->
-          ${(personName || country) ? `
-          <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px; background-color: #f7fafc; border-radius: 8px; overflow: hidden;">
-            ${personName ? `
-            <tr>
-              <td style="padding: 12px 16px; ${country ? 'border-bottom: 1px solid #edf2f7;' : ''} font-size: 13px; color: #718096; width: 35%;">صاحب الوثيقة</td>
-              <td style="padding: 12px 16px; ${country ? 'border-bottom: 1px solid #edf2f7;' : ''} font-size: 14px; font-weight: 600; color: #2d3748;">${personName}</td>
-            </tr>` : ''}
-            ${country ? `
-            <tr>
-              <td style="padding: 12px 16px; font-size: 13px; color: #718096; width: 35%;">الدولة</td>
-              <td style="padding: 12px 16px; font-size: 14px; font-weight: 600; color: #2d3748;">${country}</td>
-            </tr>` : ''}
-          </table>` : ''}
+            <!-- الجدول الأول: تفاصيل الوثيقة -->
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px; background-color: #f8fafc; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0;">
+              <tr>
+                <td style="padding: 12px 18px; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #718096; width: 35%;">التصنيف</td>
+                <td style="padding: 12px 18px; border-bottom: 1px solid #e2e8f0; font-size: 14px; font-weight: bold; color: #3182ce;">${categoryName}</td>
+              </tr>
+              ${documentNumber ? `
+              <tr>
+                <td style="padding: 12px 18px; border-bottom: 1px solid #e2e8f0; font-size: 13px; color: #718096;">رقم الوثيقة</td>
+                <td style="padding: 12px 18px; border-bottom: 1px solid #e2e8f0; font-size: 14px; font-weight: 600; color: #1a202c;">${documentNumber}</td>
+              </tr>` : ''}
+              <tr>
+                <td style="padding: 12px 18px; font-size: 13px; color: #718096;">تاريخ الانتهاء</td>
+                <td style="padding: 12px 18px; font-size: 14px; font-weight: bold; color: #e53e3e;">${expiryDate}</td>
+              </tr>
+            </table>
 
-          <!-- ملاحظات إن وجدت -->
-          ${notes ? `
-          <div style="background-color: #fffaf0; border: 1px solid #feebc8; padding: 12px 16px; border-radius: 8px; margin-bottom: 20px; font-size: 13px; color: #c05621;">
-            <strong>ملاحظات:</strong> ${notes}
-          </div>` : ''}
+            <!-- الجدول الثاني: معلومات إضافية -->
+            ${(personName || country) ? `
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 16px; background-color: #f8fafc; border-radius: 10px; overflow: hidden; border: 1px solid #e2e8f0;">
+              ${personName ? `
+              <tr>
+                <td style="padding: 12px 18px; ${country ? 'border-bottom: 1px solid #e2e8f0;' : ''} font-size: 13px; color: #718096; width: 35%;">صاحب الوثيقة</td>
+                <td style="padding: 12px 18px; ${country ? 'border-bottom: 1px solid #e2e8f0;' : ''} font-size: 14px; font-weight: 600; color: #1a202c;">${personName}</td>
+              </tr>` : ''}
+              ${country ? `
+              <tr>
+                <td style="padding: 12px 18px; font-size: 13px; color: #718096; width: 35%;">الدولة</td>
+                <td style="padding: 12px 18px; font-size: 14px; font-weight: 600; color: #1a202c;">${country}</td>
+              </tr>` : ''}
+            </table>` : ''}
 
-          <!-- توجيه -->
-          <p style="font-size: 13px; color: #718096; line-height: 1.5; margin: 0 0 20px 0; text-align: center;">
-            يرجى مراجعة النظام لتجديد الوثيقة في أقرب وقت ممكن.
-          </p>
+            <!-- ملاحظات -->
+            ${notes ? `
+            <div style="background-color: #fffaf0; border-right: 3px solid #dd6b20; padding: 12px 16px; border-radius: 6px; margin-bottom: 20px; font-size: 13px; color: #9c4221;">
+              <strong>ملاحظات:</strong> ${notes}
+            </div>` : ''}
 
-          <!-- الفوتر -->
-          <div style="border-top: 1px solid #edf2f7; padding-top: 15px; text-align: center; font-size: 11px; color: #a0aec0;">
-            نظام Alodat لإدارة الوثائق — رسالة تلقائية
+            <!-- زر أو توجيه خفيف -->
+            <div style="text-align: center; margin-top: 25px; padding-top: 20px; border-top: 1px solid #edf2f7;">
+              <p style="font-size: 12px; color: #a0aec0; margin: 0;">
+                هذه رسالة تلقائية من نظام <strong>Alodat</strong> — يرجى عدم الرد عليها.
+              </p>
+            </div>
+
           </div>
-
         </div>
       `,
     });
