@@ -12,5 +12,4 @@ jobs:
     steps:
       - name: Hit the Check Expiry API Endpoint
         run: |
-          curl -X GET "https://alodat-docs.vercel.app/api/cron/check-expiry" \
-          -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
+          curl -X GET "https://alodat-docs.vercel.app/api/check-expiry"
