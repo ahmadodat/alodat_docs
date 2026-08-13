@@ -23,7 +23,6 @@ export async function GET(request: Request) {
     .leftJoin(users, eq(documents.userId, users.id));
 
   for (const doc of expiringDocs) {
-    // إذا لم يكن هناك تاريخ انتهاء، تجاوز هذه الوثيقة لتجنب الخطأ
     if (!doc.documents.expiryDate || !doc.users?.email) continue;
 
     const expiryDate = new Date(doc.documents.expiryDate);
@@ -33,8 +32,8 @@ export async function GET(request: Request) {
       
       await sendNotificationEmail(
         doc.users.email,
-        "تنبيه: اقتراب انتهاء وثيقة",
-        `عزيزي المستخدم، نود تذكيرك بأن وثيقتك "${doc.documents.name}" ستنتهي بتاريخ الطبع ${doc.documents.expiryDate}. يرجى اتخاذ الإجراء اللازم.`
+        "Document Expiry Reminder",
+        `Hello, this is a reminder that your document "${doc.documents.name}" is expiring on ${doc.documents.expiryDate}. Please take necessary action.`
       );
     }
   }
